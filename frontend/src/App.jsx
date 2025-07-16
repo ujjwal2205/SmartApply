@@ -1,13 +1,19 @@
-import React from 'react'
+import React,{useState} from 'react'
+import {Route,Routes} from 'react-router-dom'
 import Navbar from './components/Navbar/Navbar'
-import Header from './components/Header/Header'
-import CompanyScroller from './components/CompanyScroller/CompanyScroller'
+import Home from './pages/Home/Home'
+import AboutUsPage from './pages/AboutUsPage/AboutUsPage'
+import Footer from './components/Footer/Footer'
 function App() {
+  const [login,setLogin]=useState(true);
   return (
     <div>
-      <Navbar/>
-      <Header/>
-      <CompanyScroller/>
+      <Navbar login={login} setLogin={setLogin}/>
+      <Routes>
+      <Route path='/' element={<Home/>}/>
+      <Route path='/about' element={<AboutUsPage/>}/>
+      </Routes>
+      <Footer/>
     </div>
   )
 }

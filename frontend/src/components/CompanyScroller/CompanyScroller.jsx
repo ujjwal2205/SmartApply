@@ -12,6 +12,9 @@ const logos = [
   'https://logo.clearbit.com/adobe.com',
   'https://logo.clearbit.com/stripe.com',
   'https://logo.clearbit.com/intel.com',
+  'https://logo.clearbit.com/apple.com',
+  'https://logo.clearbit.com/zomato.com',
+  'https://logo.clearbit.com/uber.com',
 ];
 
 function CompanyScroller() {

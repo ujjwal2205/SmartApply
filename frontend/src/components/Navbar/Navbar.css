@@ -1,23 +1,27 @@
 .navbar {
+  z-index: 1000;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   padding: 1rem 2rem;
   background: rgba(255, 255, 255, 0.6);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
- 
-  z-index: 1000;
+  backdrop-filter: blur(8px);
   font-family: 'Inter', sans-serif;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Logo Left */
+.navbar-logo {
+  flex: 1;
 }
 
 .logo {
   font-size: 1.75rem;
   font-weight: 700;
   color: #1f2937;
+  cursor: pointer;
   letter-spacing: -0.5px;
   transition: color 0.3s ease, transform 0.3s ease;
-  cursor: pointer;
 }
 
 .logo:hover {
@@ -25,7 +29,13 @@
   transform: translateY(-1px);
 }
 
-/* Navigation Links */
+/* Center Nav Links */
+.nav-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .nav-links {
   display: flex;
   gap: 2rem;
@@ -44,7 +54,14 @@
   transform: translateY(-2px);
 }
 
-/* Get Started Button */
+/* Right side: Get Started or User Icon */
+.nav-auth {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Button */
 .get-started-button {
   background: linear-gradient(135deg, #6366f1, #8b5cf6);
   color: white;
@@ -62,23 +79,78 @@
   box-shadow: 0 10px 18px rgba(99, 102, 241, 0.3);
 }
 
+/* User Menu */
+.user-icon {
+  font-size: 1.8rem;
+  cursor: pointer;
+  color: #0ea5e9;
+  transition: transform 0.3s ease;
+}
+
+.user-icon:hover {
+  transform: scale(1.1);
+}
+
+.user-dropdown {
+  position: absolute;
+  right: 0;
+  top: 130%;
+  background-color: white;
+  color: #1e293b;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  border-radius: 6px;
+  overflow: hidden;
+  min-width: 160px;
+  z-index: 100;
+}
+
+.user-dropdown a,
+.logout-btn {
+  display: block;
+  padding: 12px 16px;
+  font-size: 0.95rem;
+  text-decoration: none;
+  color: inherit;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.user-dropdown a:hover,
+.logout-btn:hover {
+  background-color: #f1f5f9;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
+  .nav-center {
+    position: static;
+    transform: none;
+    margin-top: 1rem;
+    width: 100%;
+  }
+
   .navbar {
     flex-direction: column;
     align-items: flex-start;
-    padding: 1rem;
   }
 
   .nav-links {
     flex-direction: column;
     gap: 1rem;
     width: 100%;
+  }
+
+  .nav-auth {
+    width: 100%;
+    justify-content: center;
     margin-top: 1rem;
   }
 
   .get-started-button {
-    margin-top: 1rem;
     width: 100%;
     text-align: center;
   }
