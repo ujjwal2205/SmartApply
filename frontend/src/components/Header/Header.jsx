@@ -2,7 +2,7 @@ import React from 'react';
 import './Header.css';
 import heroImage from '../../assets/auto-apply-hero.png';
 
-function Header() {
+function Header({login}) {
   return (
     <main className="hero">
       {/* Left Content */}
@@ -14,9 +14,13 @@ function Header() {
           SmartApply finds and applies to jobs that match your resume, skills, and preferences —
           saving you time and boosting your interview chances.
         </p>
-        <button className="hero-btn" aria-label="Start Applying Now">
+        {login?
+        <a href="/information" className="hero-btn">
           Start Applying →
-        </button>
+        </a>:
+        <a href="/login" className="hero-btn">
+          Start Applying →
+        </a>}
 
         <div className="tagline">
           ⚡ Built with AI · Automation · Real-time Tracking

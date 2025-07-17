@@ -6,7 +6,7 @@ import CompanyScroller from '../../components/CompanyScroller/CompanyScroller';
 import WhySmartApply from '../../components/Why_Smart_Apply/WhySmartApply';
 import MiniAbout from '../../components/MiniAbout/MiniAbout';
 
-function Home() {
+function Home({login}) {
   const location = useLocation();
 
   useEffect(() => {
@@ -23,11 +23,9 @@ function Home() {
 
   return (
     <div>
-      <Header />
+      <Header login={login}/>
       <CompanyScroller />
-      <section id="why-smartapply">
         <WhySmartApply />
-      </section>
       <MiniAbout />
     </div>
   );

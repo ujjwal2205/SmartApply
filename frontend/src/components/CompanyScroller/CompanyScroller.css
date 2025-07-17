@@ -45,7 +45,7 @@
 .logo-track {
   display: flex;
   width: fit-content;
-  animation: scroll 50s linear infinite;
+  animation: scroll 40s linear infinite;
   gap: 4rem;
   align-items: center;
  

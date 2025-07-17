@@ -1,14 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./Navbar.css";
 import { FaUserCircle } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 function Navbar({ login, setLogin }) {
   const [dropdown, setDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
-  const toggleDropdown = () => {
-    setDropdown((prev) => !prev);
-  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (!dropdownRef.current.contains(event.target)) {
+        setDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+  },[]);
+
+  const toggleDropdown = () => setDropdown((prev) => !prev);
 
   return (
     <div className="navbar">
@@ -26,19 +36,17 @@ function Navbar({ login, setLogin }) {
 
       <div className="nav-auth">
         {login ? (
-          <div className="user-menu">
+          <div className="user-menu" ref={dropdownRef}>
             <div className="user-icon" onClick={toggleDropdown}>
               <FaUserCircle />
             </div>
-            {dropdown && (
-              <div className="user-dropdown">
-                <Link to="/dashboard">Dashboard</Link>
-                <button className="logout-btn" onClick={()=>setLogin(false)}>Logout</button>
-              </div>
-            )}
+            <div className={`user-dropdown ${dropdown ? "show" : ""}`}>
+              <Link to="/dashboard" onClick={()=>setDropdown(false)}>Dashboard</Link>
+              <Link to="/" className="logout-btn" onClick={() => setLogin(false)}>Logout</Link>
+            </div>
           </div>
         ) : (
-          <button className="get-started-button" onClick={()=>setLogin(true)}>Get Started</button>
+          <a className="get-started-button" href="/login">Get Started</a>
         )}
       </div>
     </div>
