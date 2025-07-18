@@ -45,7 +45,7 @@ function SignUp({setLogin}) {
   The email address <b>{formData.email}</b> will be used for submitting job applications.
   Please confirm that this is accurate before proceeding.
 </p>
-    <button className='Ok' onClick={() => {setLogin(true);navigate('/information')}}>Ok</button>
+    <button className='Ok' onClick={() => {setLogin(true);navigate('/information',{state:{toastMessage:"SignUp Successful!"}})}}>Ok</button>
     <button className='Cancel' onClick={()=>navigate('/')}>Cancel</button>
     </div>
     :
@@ -59,7 +59,7 @@ function SignUp({setLogin}) {
          className='input-field'
          name="firstName"
          type="text"
-         placeholder='First Name'
+         placeholder='First Name*'
          required/>
          <input onChange={handleChange}
          className='input-field'
@@ -70,20 +70,20 @@ function SignUp({setLogin}) {
          className='input-field'
          name="lastName"
          type="text"
-         placeholder='Last Name'
+         placeholder='Last Name*'
          required/>
          <input onChange={handleChange}
          className='input-field'
          name="email"
          type="email"
-         placeholder='Your Email'
+         placeholder='Your Email*'
          required/>
          <div className='password-wrapper'>
          <input onChange={handleChange}
          className='input-field'
          name="password"
          type={showPassword?"text":"password"}
-         placeholder='Your Password'
+         placeholder='Your Password*'
          required/>
          <span onClick={()=>setShowPassword(prev=>!prev)}>{showPassword?<FaEyeSlash/>:<FaEye/>}</span>
          </div>
@@ -92,7 +92,7 @@ function SignUp({setLogin}) {
          className='input-field'
          name="confirmPassword"
          type={showConfirmPassword?"text":"password"}
-         placeholder='Confirm Password'
+         placeholder='Confirm Password*'
          required/>
          <span onClick={()=>setShowConfirmPassword(prev=>!prev)}>{showConfirmPassword?<FaEyeSlash/>:<FaEye/>}</span>
          </div>

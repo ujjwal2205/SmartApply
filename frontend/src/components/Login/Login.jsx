@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
 import { FaTimes } from "react-icons/fa"; // Correct icon for "X" (cross)
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
-import { ToastContainer, toast } from 'react-toastify'; 
 import './Login.css'
 function Login({ login, setLogin }) {
   const [showPassword,setShowPassword]=useState(false);
@@ -11,8 +10,7 @@ function Login({ login, setLogin }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     setLogin(true);
-      navigate('/information');
-      toast.success("Logged in successfully!");
+      navigate('/information',{state:{toastMessage:"Login Successful!"}});
   };
   const handleCross=()=>{
     setLogin(false);
@@ -27,12 +25,12 @@ function Login({ login, setLogin }) {
 
       <h2 className="login-title">WELCOME BACK</h2>
 
-      <form className="login-form">
+      <form className="login-form" onSubmit={handleSubmit}>
         <input
           className="input-field"
           name="email"
           type="email"
-          placeholder="Your Email"
+          placeholder="Your Email*"
           required
         />
         <div className='password-wrapper'>
@@ -40,7 +38,7 @@ function Login({ login, setLogin }) {
           className="input-field"
           name="password"
           type= {showPassword?"text":"password"}
-          placeholder="Your Password"
+          placeholder="Your Password*"
           required
         />
         <span onClick={()=>setShowPassword(prev => !prev)}>{showPassword?<FaEyeSlash/>:<FaEye/>}</span>
@@ -49,7 +47,7 @@ function Login({ login, setLogin }) {
           <button className="forgot-password">Forgot your password?</button>
         </div>
 
-        <button type="submit" className="submit-button" onClick={handleSubmit}>Submit</button>
+        <button type="submit" className="submit-button" >Submit</button>
       </form>
 
       <p className="or-text">OR</p>
@@ -66,7 +64,7 @@ function Login({ login, setLogin }) {
       <p className="signup-link">
         Don't have an account? <a href="/signup">Sign Up</a>
       </p>
-      <ToastContainer position="top-right" autoClose={2000} />
+
     </div>
   );
 }
