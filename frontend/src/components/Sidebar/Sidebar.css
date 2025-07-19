@@ -1,0 +1,52 @@
+.sidebar {
+  width: 250px;
+  background-color: #0f172a; /* dark sidebar */
+  color: white;
+  height: 100vh;
+  padding: 20px 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Base styles for both links */
+.jobsInfoLink,
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #e2e8f0;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+/* Hover effect */
+.jobsInfoLink:hover,
+.userInfo:hover {
+  background: rgba(255, 255, 255, 0.08);
+  transform: translateX(4px);
+  color: #ffffff;
+}
+
+/* Icon style */
+.jobsInfoLink svg,
+.userInfo svg {
+  font-size: 1.2rem;
+  color: #38bdf8;
+  transition: color 0.3s ease;
+}
+
+/* Active tab styling */
+.active-tab .jobsInfoLink,
+.active-tab .userInfo {
+  background: linear-gradient(to right, #06b6d4, #0ea5e9);
+  color: #0f172a;
+  font-weight: 600;
+  box-shadow: inset 3px 0 0 #38bdf8;
+  transform: scale(1.03);
+}
