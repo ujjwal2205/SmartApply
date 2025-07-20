@@ -1,6 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from 'react'
 import './JobsInfo.css'
+import {useLocation,useNavigate} from 'react-router-dom';
+import { toast } from 'react-toastify';
 function JobsInfo() {
+  const location=useLocation();
+  const navigate=useNavigate();
+  useEffect(() => {
+      if (location.state?.toastMessage) {
+        toast.success(location.state.toastMessage);
+        navigate(location.pathname, { replace: true, state: {} });
+      }
+    }, [location,navigate]);
   const dummyJobs = [
     {
       title: "Frontend Developer",

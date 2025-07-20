@@ -7,7 +7,7 @@ function Information() {
     const location = useLocation();
     const navigate=useNavigate();
      useEffect(() => {
-    if (location.state.toastMessage) {
+    if (location.state?.toastMessage) {
       toast.success(location.state.toastMessage);
       navigate(location.pathname, { replace: true, state: {} });
     }
@@ -45,15 +45,16 @@ function Information() {
         return;
     }
     if(file.size>MAX_FILE_SIZE){
-        alert("File must be less than or equal to 300 KB.");
+        toast.error("File must be less than or equal to 300 KB.");
         e.target.value=null;
+        setForm(prev => ({ ...prev, resume: null}));
         return;
     }
       setForm(prev => ({ ...prev, resume: file }));
    }
    const handleSubmit=(e)=>{
     e.preventDefault();
-    navigate("/dashboard")
+    navigate("/dashboard/jobsInfo",{state:{toastMessage:"Applied Successfully!"}})
    }
     return (
      <div className='information-page'>   

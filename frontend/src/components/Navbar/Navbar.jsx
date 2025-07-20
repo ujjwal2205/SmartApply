@@ -41,7 +41,7 @@ function Navbar({ login, setLogin }) {
               <FaUserCircle />
             </div>
             <div className={`user-dropdown ${dropdown ? "show" : ""}`}>
-              <Link to="/dashboard" onClick={()=>setDropdown(false)}>Dashboard</Link>
+              <Link to="/dashboard/jobsInfo" onClick={()=>setDropdown(false)}>Dashboard</Link>
               <Link to="/" className="logout-btn" onClick={() => setLogin(false)}>Logout</Link>
             </div>
           </div>

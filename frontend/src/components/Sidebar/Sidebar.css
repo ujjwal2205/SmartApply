@@ -2,7 +2,7 @@
   width: 250px;
   background-color: #0f172a; /* dark sidebar */
   color: white;
-  height: 100vh;
+  height: fill;
   padding: 20px 10px;
   display: flex;
   flex-direction: column;
