@@ -11,6 +11,7 @@ import Footer from './components/Footer/Footer'
 import Dashboard from '../src/Dashboard';
 import JobsInfoPage from './pages/JobsInfoPage/JobsInfoPage';
 import UserInfoPage from './pages/UserInfoPage/UserInfoPage';
+
 function App() {
   const [login,setLogin]=useState(false);
   return (

@@ -1,8 +1,9 @@
 import React,{useState} from 'react';
 import { useNavigate } from 'react-router-dom';
-import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { GoogleLogin } from '@react-oauth/google';
 import { FaTimes } from "react-icons/fa"; // Correct icon for "X" (cross)
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import axios from 'axios';
 import './Login.css'
 function Login({ login, setLogin }) {
   const [showPassword,setShowPassword]=useState(false);
@@ -16,6 +17,30 @@ function Login({ login, setLogin }) {
     setLogin(false);
     navigate('/');
   }
+  const handleSuccess=async(CredentialResponse)=>{
+        const token=CredentialResponse.credential;
+        try{
+            const response=await axios.post("http://localhost:4000/api/user/googleLogin",{
+                idToken:token,
+            })
+            if(response.data.status){
+              setLogin(true);
+              navigate('/information',{state:{toastMessage:"Login Successful!"}});
+            }
+            else{
+                setLogin(false);
+               navigate('/');
+            }
+        }
+        catch(error){
+         console.log("Login failed",error)
+         setLogin(false);
+          navigate('/');
+        }
+    }
+     const handleError = () => {
+    alert("Google Sign In was unsuccessful. Try again later.");
+  };
   return (
     <div className="login-box">
       {/* Close button */}
@@ -53,12 +78,10 @@ function Login({ login, setLogin }) {
       <p className="or-text">OR</p>
 
       <div className="google-login">
-        <GoogleOAuthProvider clientId="YOUR_GOOGLE_CLIENT_ID">
           <GoogleLogin
-            onSuccess={(res) => console.log(res)}
-            onError={() => console.log("Login Failed")}
+            onSuccess={handleSuccess}
+            onError={handleError}
           />
-        </GoogleOAuthProvider>
       </div>
 
       <p className="signup-link">

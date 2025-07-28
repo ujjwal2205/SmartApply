@@ -2,7 +2,8 @@ import userModel from "../models/UserModel.js";
 import bcrypt from "bcrypt";
 import validator from "validator";
 import jwt from "jsonwebtoken";
-
+import express from "express";
+import verifyGoogleToken from "../middleware/auth.js";
 const createToken=(id)=>{
     return jwt.sign({id},process.env.JWT_SECRET);
 } 
@@ -30,7 +31,8 @@ const signUpUser=async(req,res)=>{
             middleName:middleName,
             lastName:lastName,
             email:normalizedEmail,
-            password:hashedPassword
+            password:hashedPassword,
+            authType:"local"
         })
         await newUser.save();
         const token=createToken(newUser._id);
@@ -51,6 +53,9 @@ const login= async (req,res)=>{
         if(!user){
             return res.json({success:false,message:"User doesn't exist"});
         }
+        if(user.authType==='google'){
+            return res.json({success:false,message:"Please login via Google Sign-in.'"});
+        }
         const isMatch=await bcrypt.compare(password,user.password);
         if(!isMatch){
             return res.json({success:false,message:"Invalid credentials"});
@@ -63,4 +68,30 @@ const login= async (req,res)=>{
      res.json({success:false,message:error.message})
     }
 }
-export {signUpUser,login};
+//googleLogin
+const googleLogin= async (req,res)=>{
+ try{
+    const {idToken}=req.body;
+    const googleUser=await verifyGoogleToken(idToken);
+    const {email,given_name,family_name}=googleUser;
+    const normalizeEmail=email.toLowerCase()
+    let user=await userModel.findOne({email:normalizeEmail});
+    if(!user){
+         user=new userModel({
+            email:normalizeEmail,
+            firstName:given_name,
+            lastName:family_name||"N/A",
+            authType:"google"
+        });
+    await user.save();
+    }
+     const token= createToken(user._id)
+     console.log("Received Google Token:", token);
+     res.json({status:true,token});
+ }
+ catch(error){
+  console.log(error);
+  res.json({status:false,message:"Invalid Token"});
+ }
+}
+export {signUpUser,login,googleLogin};
