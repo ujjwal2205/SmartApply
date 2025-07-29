@@ -86,7 +86,6 @@ const googleLogin= async (req,res)=>{
     await user.save();
     }
      const token= createToken(user._id)
-     console.log("Received Google Token:", token);
      res.json({status:true,token});
  }
  catch(error){
