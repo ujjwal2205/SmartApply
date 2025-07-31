@@ -3,7 +3,30 @@ import { useNavigate } from 'react-router-dom';
 import './Information.css'
 import {toast} from 'react-toastify';
 import { useLocation } from 'react-router-dom';
+import Select from 'react-select'
+import cityOptions from '../../../cities.json'
 function Information() {
+  const preferredRoles = [
+  { value: "frontend_developer", label: "Frontend Development" },
+  { value: "backend_developer", label: "Backend Development" },
+  { value: "fullstack_developer", label: "Full Stack Development" },
+  { value: "software_engineer", label: "Software Development" },
+  { value: "data_analyst", label: "Data Analyst" },
+  { value: "data_scientist", label: "Data Science" },
+  { value: "machine_learning_engineer", label: "Machine Learning" },
+  { value: "android_developer", label: "Android App Development" },
+  { value: "ios_developer", label: "iOS App Development" },
+  { value: "devops_engineer", label: "DevOps Engineer" },
+  { value: "ui_ux_design", label: "UI/UX Design" },
+  { value: "cloud_engineer", label: "Cloud Computing" },
+  { value: "qa_engineer", label: "Software Testing" },
+  { value: "product_management", label: "Product Management" },
+  { value: "business_development", label: "Business Development" },
+  { value: "blockchain_development", label: "Blockchain Development" },
+  { value: "game_development", label: "Game Development" },
+  { value: "Cyber_Security", label: "Cyber Security" },
+];
+
     const location = useLocation();
     const navigate=useNavigate();
      useEffect(() => {
@@ -56,6 +79,18 @@ function Information() {
     e.preventDefault();
     navigate("/dashboard/jobsInfo",{state:{toastMessage:"Applied Successfully!"}})
    }
+   const handleChange=(selectedOption)=>{
+    console.log("Selected:", selectedOption);
+   }
+   const options = 
+    cityOptions
+    .map((city)=>({
+      value:city.name,
+      label:city.name,
+    })).sort((a, b) => a.label.localeCompare(b.label));
+    const handleChangePrefferedRoles=(selectedOption)=>{
+      console.log("Selected:",selectedOption);
+    }
     return (
      <div className='information-page'>   
     <div className='portals'>
@@ -92,17 +127,17 @@ function Information() {
         placeholder='Last Name*'
         required
      />
-     <input
-        className='input'
-        name="location"
-        type="text"
-        placeholder='Enter Your Preffered Locations(comma seperated)'
+     <Select
+        options={options}
+        onChange={handleChange}
+        isSearchable={true}
+        placeholder='e.g Delhi'
      />
-     <input
-        className='input'
-        type="text"
-        name="prefferedRole"
-        placeholder='Enter your preffered roles(comma seperated)*'
+     <Select
+        options={preferredRoles.sort((a,b)=>a.label.localeCompare(b.label))}
+        onChange={handleChangePrefferedRoles}
+        isSearchable={true}
+        placeholder='Enter your preffered roles*'
         required
      />
      <select name="availability" className="input" required>
