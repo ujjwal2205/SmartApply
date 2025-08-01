@@ -51,9 +51,8 @@ function Information() {
   });
     const portals = [
   { name: "LinkedIn",status:false},
-  { name: "Naukri", status:true},
+  { name: "Naukri", status:false},
   { name: "Internshala", status:false},
-  { name: "Indeed", status:true},
 ];
    useEffect(()=>{
     for(let i=0;i<portals.length;i++){

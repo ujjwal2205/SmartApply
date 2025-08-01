@@ -26,10 +26,9 @@ function JobsInfo() {
     }
   ];
   const portals = [
-    { name: "LinkedIn",status:true},
-    { name: "Naukri", status:true},
-    { name: "Internshala", status:true},
-    { name: "Indeed", status:false},
+    { name: "LinkedIn",status:false},
+    { name: "Naukri", status:false},
+    { name: "Internshala", status:false},
   ];
   const statuses = ["Applied", "Talking Stage", "Interview Scheduled", "No Reply"];
   const [jobs,setJobs]=useState(dummyJobs);
