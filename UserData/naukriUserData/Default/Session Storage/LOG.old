@@ -1,0 +1,15 @@
+2025/08/03-00:23:26.108 5780 Reusing MANIFEST C:\Users\ujjwa\OneDrive\Desktop\SmartApply\UserData\naukriUserData\Default\Session Storage/MANIFEST-000001
+2025/08/03-00:23:26.113 5780 Recovering log #129
+2025/08/03-00:23:26.116 5780 Reusing old log C:\Users\ujjwa\OneDrive\Desktop\SmartApply\UserData\naukriUserData\Default\Session Storage/000129.log 
+2025/08/03-00:23:33.393 44b4 Level-0 table #133: started
+2025/08/03-00:23:33.397 44b4 Level-0 table #133: 30638 bytes OK
+2025/08/03-00:23:33.399 44b4 Delete type=0 #129
+2025/08/03-00:23:33.400 44b4 Compacting 4@0 + 1@1 files
+2025/08/03-00:23:33.408 44b4 Generated table #134@0: 22 keys, 27999 bytes
+2025/08/03-00:23:33.408 44b4 Compacted 4@0 + 1@1 files => 27999 bytes
+2025/08/03-00:23:33.409 44b4 compacted to: files[ 0 1 0 0 0 0 0 ]
+2025/08/03-00:23:33.410 44b4 Delete type=2 #121
+2025/08/03-00:23:33.410 44b4 Delete type=2 #124
+2025/08/03-00:23:33.410 44b4 Delete type=2 #127
+2025/08/03-00:23:33.410 44b4 Delete type=2 #130
+2025/08/03-00:23:33.410 44b4 Delete type=2 #133

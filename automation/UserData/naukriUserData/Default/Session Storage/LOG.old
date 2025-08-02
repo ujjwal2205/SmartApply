@@ -1,3 +1,4 @@
-2025/08/01-23:51:31.148 3bb0 Reusing MANIFEST C:\Users\ujjwa\OneDrive\Desktop\SmartApply\automation\UserData\naukriUserData\Default\Session Storage/MANIFEST-000001
-2025/08/01-23:51:31.152 3bb0 Recovering log #4
-2025/08/01-23:51:31.163 3bb0 Reusing old log C:\Users\ujjwa\OneDrive\Desktop\SmartApply\automation\UserData\naukriUserData\Default\Session Storage/000004.log 
+2025/08/02-17:32:02.104 362c Creating DB C:\Users\ujjwa\OneDrive\Desktop\SmartApply\automation\UserData\naukriUserData\Default\Session Storage since it was missing.
+2025/08/02-17:32:02.132 362c Reusing MANIFEST C:\Users\ujjwa\OneDrive\Desktop\SmartApply\automation\UserData\naukriUserData\Default\Session Storage/MANIFEST-000001
+2025/08/02-17:32:23.011 43cc Level-0 table #5: started
+2025/08/02-17:32:23.021 43cc Level-0 table #5: 36797 bytes OK
