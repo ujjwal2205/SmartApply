@@ -2,7 +2,7 @@ import {chromium } from 'playwright';
 import fs from "fs"
 
 ( async () => {
-  const context = await chromium.launchPersistentContext('./UserData/naukriUserData', {
+  const context = await chromium.launchPersistentContext('UserData/naukriUserData', {
   headless: false,
   args: ['--disable-blink-features=AutomationControlled'],
 });

@@ -190,7 +190,7 @@ function Information() {
         className='textArea'
         required
        />
-       <textarea name="whyHire" placeholder="Why should we hire you?*"  className="textArea" required />
+       <textarea name="whyHire" placeholder="Mention in detail what relevant skill or past experience you have for the internship. What excites you about the internship?*"  className="textArea" required />
        <button type="submit" className='button'>Save & Continue</button>
     </form>
     </div>

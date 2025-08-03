@@ -1,7 +1,7 @@
 import {chromium} from 'playwright';
 import fs from 'fs';
 ( async () => {
-  const context = await chromium.launchPersistentContext('../UserData/linkedInUserData', {
+  const context = await chromium.launchPersistentContext('UserData/linkedInUserData', {
   headless: false,
   args: ['--disable-blink-features=AutomationControlled'],
 });
@@ -20,7 +20,7 @@ import fs from 'fs';
 
   // ✅ Save session state
   const storage=await context.storageState();
-  fs.writeFileSync('../sessions/linkedInSessions.json', JSON.stringify(storage,null,2));
+  fs.writeFileSync('./sessions/linkedInSessions.json', JSON.stringify(storage,null,2));
 
   await context.close();
 })();

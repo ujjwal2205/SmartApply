@@ -2,7 +2,7 @@ import { chromium } from 'playwright';
 import fs from 'fs';
 
 (async () => {
-  const context = await chromium.launchPersistentContext('../UserData/internshalaUserData', {
+  const context = await chromium.launchPersistentContext('UserData/internshalaUserData', {
     headless: false,
     args: ['--disable-blink-features=AutomationControlled'],
   });
@@ -20,7 +20,7 @@ import fs from 'fs';
 
   // ✅ Save session state
   const storage = await context.storageState();
-  fs.writeFileSync('../sessions/internshalaSessions.json', JSON.stringify(storage,null,2));  //storage=>konsa data ko string me convert krna hai 
+  fs.writeFileSync('./sessions/internshalaSessions.json', JSON.stringify(storage,null,2));  //storage=>konsa data ko string me convert krna hai 
   // null=> koi filter lgana hai??
   // har line me 2 spaces ka gap taaki neat dikhe
   await context.close();

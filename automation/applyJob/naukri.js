@@ -3,7 +3,7 @@ import jobsInfoModel from "../../backend/models/AppliedJobsModel.js";
 import {chromium} from "playwright";
 const naukriJobs=async(email)=>{
     const normalizedEmail=email.toLowerCase();
-    const context=await chromium.launchPersistentContext('../UserData/naukriUserData',{
+    const context=await chromium.launchPersistentContext('UserData/naukriUserData',{
         headless:false,
         args: ['--disable-blink-features=AutomationControlled'],
     });
