@@ -1,21 +1,43 @@
-import React,{useState} from 'react';
+import React,{useState,useContext} from 'react';
 import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from '@react-oauth/google';
 import { FaTimes } from "react-icons/fa"; // Correct icon for "X" (cross)
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import {StoreContext} from '../../context/StoreContext';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 import './Login.css'
 function Login({ login, setLogin }) {
   const [showPassword,setShowPassword]=useState(false);
+
+  const {url,setToken}=useContext(StoreContext);
+  const [data,setData]=useState({
+    email:"",
+    password:""
+  })
   const navigate = useNavigate();
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    setLogin(true);
-      navigate('/information',{state:{toastMessage:"Login Successful!"}});
+    const response=await axios.post(url+"/api/user/login",data);
+   if(response.data.success){
+     setLogin(true);
+     setToken(response.data.token);
+     localStorage.setItem("token",response.data.token);
+     navigate('/information',{state:{toastMessage:"Login Successful!"}});
+   }
+   else{
+    setLogin(false);
+    toast.error(response.data.message);
+   }
   };
   const handleCross=()=>{
     setLogin(false);
     navigate('/');
+  }
+  const handleChange=async(e)=>{
+    const name=e.target.name;
+    const value=e.target.value;
+    setData({...data,[name]:value})
   }
   const handleSuccess=async(CredentialResponse)=>{
         const token=CredentialResponse.credential;
@@ -56,6 +78,7 @@ function Login({ login, setLogin }) {
           name="email"
           type="email"
           placeholder="Your Email*"
+          onChange={handleChange}
           required
         />
         <div className='password-wrapper'>
@@ -65,6 +88,7 @@ function Login({ login, setLogin }) {
           type= {showPassword?"text":"password"}
           placeholder="Your Password*"
           required
+          onChange={handleChange}
         />
         <span onClick={()=>setShowPassword(prev => !prev)}>{showPassword?<FaEyeSlash/>:<FaEye/>}</span>
         </div>

@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState,useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import './SignUp.css'
 import {GoogleLogin } from '@react-oauth/google';
 import { FaTimes } from "react-icons/fa";
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import axios from 'axios';
+import { StoreContext } from '../../context/StoreContext';
+import { toast } from 'react-toastify';
 function SignUp({setLogin}) {
     const navigate = useNavigate();
+    const {url,setToken}=useContext(StoreContext);
     const [formData,setFormData]=useState(
         {
             firstName:'',
@@ -33,9 +36,18 @@ function SignUp({setLogin}) {
     setLogin(false);
     navigate('/');
   }
-   const handleSubmit = (e) => {
+   const handleSubmit = async(e) => {
       e.preventDefault();
-       setShowNote(true);
+      const response=await axios.post(url+"/api/user/signUp",formData);
+      if(response.data.success){
+        setToken(response.data.token);
+        localStorage.setItem("token",response.data.token);
+        setShowNote(true);
+      }
+      else{
+        toast.error(response.data.message);
+        setLogin(false);
+      }
     }
     const handleSuccess=async(CredentialResponse)=>{
             const token=CredentialResponse.credential;

@@ -1,0 +1,271 @@
+{
+  "cookies": [
+    {
+      "name": "GCLB",
+      "value": "COmewcP3rdnT_wEQAw",
+      "domain": "apna.co",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "waap_id",
+      "value": "7cd4h5Oz8BOzBEXGT/WJHA+a+Bsc1qzwApMCiCQi7UQwcnrE2xGBicWtkDEywIAZgG/HZr2pjvW2xsN699j1iQasIRk8v0qrPM4VY+D0vu/WZoobzb3vf3Io6Qfappg/Sk0j63EWabH46XrgjsiqTCGnX+oh4X3KK7yZo5XlM1z7rS8s3VmuCXICj0uTdMJd1TcaXWNZwffo/zJ1+lVIzCvcgMT4afzS867a3jpVhuAyDJ/xYfNARBwWshODKfpnXg__",
+      "domain": ".apna.co",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": true,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_gcl_au",
+      "value": "1.1.1489207388.1754309763",
+      "domain": ".apna.co",
+      "path": "/",
+      "expires": 1762085763,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "CLID",
+      "value": "b474521166c847e89dc8883366ca748a.20250804.20260804",
+      "domain": "www.clarity.ms",
+      "path": "/",
+      "expires": 1785845763.391632,
+      "httpOnly": true,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_gid",
+      "value": "GA1.2.1279373613.1754309763",
+      "domain": ".apna.co",
+      "path": "/",
+      "expires": 1754396179,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_gat_UA-155377963-1",
+      "value": "1",
+      "domain": ".apna.co",
+      "path": "/",
+      "expires": 1754309823,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_fbp",
+      "value": "fb.1.1754309763874.734430988473979429",
+      "domain": ".apna.co",
+      "path": "/",
+      "expires": 1762085779,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_ga_JFZ56MSSE1",
+      "value": "GS2.1.s1754309763$o1$g0$t1754309763$j60$l0$h755024749",
+      "domain": ".apna.co",
+      "path": "/",
+      "expires": 1788869763.935092,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_clck",
+      "value": "vow3ph%7C2%7Cfy6%7C0%7C2042",
+      "domain": ".apna.co",
+      "path": "/",
+      "expires": 1785845763,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "MUID",
+      "value": "38F3455618E267361BD6536819E46637",
+      "domain": ".bing.com",
+      "path": "/",
+      "expires": 1788005764.465926,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "MR",
+      "value": "0",
+      "domain": ".c.bing.com",
+      "path": "/",
+      "expires": 1754914564.46598,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "SRM_B",
+      "value": "38F3455618E267361BD6536819E46637",
+      "domain": ".c.bing.com",
+      "path": "/",
+      "expires": 1788005764.465992,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "SM",
+      "value": "C",
+      "domain": ".c.clarity.ms",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "MUID",
+      "value": "38F3455618E267361BD6536819E46637",
+      "domain": ".clarity.ms",
+      "path": "/",
+      "expires": 1788005764.602902,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "MR",
+      "value": "0",
+      "domain": ".c.clarity.ms",
+      "path": "/",
+      "expires": 1754914564.602926,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "ANONCHK",
+      "value": "0",
+      "domain": ".c.clarity.ms",
+      "path": "/",
+      "expires": 1754310364.602935,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    },
+    {
+      "name": "_ga",
+      "value": "GA1.2.1367792153.1754309763",
+      "domain": ".apna.co",
+      "path": "/",
+      "expires": 1788869779.130136,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "mp_b96e1914cc08adb5d3332330e947ca74_mixpanel",
+      "value": "%7B%22distinct_id%22%3A59637225%2C%22%24device_id%22%3A%227f2293ae-1309-40cc-975a-8606c394eb16%22%2C%22%24initial_referrer%22%3A%22%24direct%22%2C%22%24initial_referring_domain%22%3A%22%24direct%22%2C%22__mps%22%3A%7B%7D%2C%22__mpso%22%3A%7B%7D%2C%22__mpus%22%3A%7B%7D%2C%22__mpa%22%3A%7B%7D%2C%22__mpu%22%3A%7B%7D%2C%22__mpr%22%3A%5B%5D%2C%22__mpap%22%3A%5B%5D%2C%22%24user_id%22%3A59637225%7D",
+      "domain": ".apna.co",
+      "path": "/",
+      "expires": 1785845779,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_clsk",
+      "value": "198681t%7C1754309779804%7C3%7C1%7Cn.clarity.ms%2Fcollect",
+      "domain": ".apna.co",
+      "path": "/",
+      "expires": 1754396179,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    },
+    {
+      "name": "_s",
+      "value": "ZkaaZkL1EbQjcOZ85s39b%2F5mECBFvDMqRS4AhvYAqfh72SMSOZhn6n6h9IkURLTf",
+      "domain": ".app.link",
+      "path": "/",
+      "expires": 1785845779.855524,
+      "httpOnly": false,
+      "secure": true,
+      "sameSite": "None"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://apna.co",
+      "localStorage": [
+        {
+          "name": "user_id",
+          "value": "59637225"
+        },
+        {
+          "name": "topicsLastReferenceTime",
+          "value": "1754309779135"
+        },
+        {
+          "name": "__user__",
+          "value": "{\"id\":59637225,\"phone_number\":\"9058145299\",\"full_name\":\"Ujjwal Gupta\",\"email\":\"\"}"
+        },
+        {
+          "name": "_gcl_ls",
+          "value": "{\"schema\":\"gcl\",\"version\":1,\"gcl_ctr\":{\"value\":{\"value\":0,\"creationTimeMs\":1754309763273},\"expires\":1762085763273}}"
+        },
+        {
+          "name": "PRE_APPLIED_FILTERS_FREQUENCY",
+          "value": "2"
+        },
+        {
+          "name": "lastExternalReferrerTime",
+          "value": "1754309763869"
+        },
+        {
+          "name": "web_user_id",
+          "value": "d98ea73a-47fe-4edd-a19c-9551326f5c36"
+        },
+        {
+          "name": "__token__",
+          "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NjM3MjI1IiwiZXhwIjoxNzU0OTE0NTc4fQ.RAbk1J3qnmmL8_waoLXXHj6xTt3K7UZcHAgaDIB1_00"
+        },
+        {
+          "name": "__mpq_b96e1914cc08adb5d3332330e947ca74_pp",
+          "value": "[]"
+        },
+        {
+          "name": "__isOnboardingComplete__",
+          "value": "true"
+        },
+        {
+          "name": "__mpq_b96e1914cc08adb5d3332330e947ca74_ev",
+          "value": "[{\"id\":\"zyrj1r8kxgwrrk7t\",\"flushAfter\":1754309787543,\"payload\":{\"event\":\"Web OTP Entered\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/?user_auth=otp_verification\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"87gp1vr7i0r0o0aw\",\"time\":1754309777.543,\"distinct_id\":\"$device:7f2293ae-1309-40cc-975a-8606c394eb16\",\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"mobile_number_entered\":\"9058145299\",\"screen\":\"main_page\",\"source\":\"non job context login\",\"trafficChannel\":\"Internal Navigation\",\"isCrawler\":false,\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"deviceOS\":\"Other\",\"deviceType\":\"Desktop\",\"userPlatform\":\"Apna Main Website\",\"web_logged_in\":\"No\",\"userUID\":\"N/A\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}},{\"id\":\"hd5b1wfpulccfu1p\",\"flushAfter\":1754309788206,\"payload\":{\"event\":\"$identify\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/?user_auth=otp_verification\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"fshks51u9b9feqf4\",\"time\":1754309778.206,\"distinct_id\":59637225,\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"$user_id\":59637225,\"$anon_distinct_id\":\"$device:7f2293ae-1309-40cc-975a-8606c394eb16\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}},{\"id\":\"k3qszjb47e7xk4p2\",\"flushAfter\":1754309788209,\"payload\":{\"event\":\"Web onboarding login success\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/?user_auth=otp_verification\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"h9w8i5bho8fyayki\",\"time\":1754309778.208,\"distinct_id\":59637225,\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"$user_id\":59637225,\"userType\":\"old enriched user\",\"mobile_number_entered\":\"9058145299\",\"profile_enriched\":true,\"screen\":\"main_page\",\"source\":\"non job context login\",\"trafficChannel\":\"Internal Navigation\",\"isCrawler\":false,\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"deviceOS\":\"Other\",\"deviceType\":\"Desktop\",\"userPlatform\":\"Apna Main Website\",\"web_logged_in\":\"Yes\",\"userUID\":\"59637225\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}},{\"id\":\"pafvc3bsaez3i0cb\",\"flushAfter\":1754309789391,\"payload\":{\"event\":\"Update profile shown web\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/candidate/jobs?c_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NjM3MjI1IiwiZXhwIjoxNzU0OTE0NTc4fQ.RAbk1J3qnmmL8_waoLXXHj6xTt3K7UZcHAgaDIB1_00\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"68fr1sid16iv2n2c\",\"time\":1754309779.39,\"distinct_id\":59637225,\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"$user_id\":59637225,\"source\":\"Job Feed Web\",\"trafficChannel\":\"Internal Navigation\",\"isCrawler\":false,\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"deviceOS\":\"Other\",\"deviceType\":\"Desktop\",\"userPlatform\":\"Apna Main Website\",\"web_logged_in\":\"Yes\",\"profile_enriched\":true,\"userUID\":\"59637225\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}},{\"id\":\"q3apgc9q0ox1rb08\",\"flushAfter\":1754309789496,\"payload\":{\"event\":\"Job Impression Web\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/candidate/jobs?c_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NjM3MjI1IiwiZXhwIjoxNzU0OTE0NTc4fQ.RAbk1J3qnmmL8_waoLXXHj6xTt3K7UZcHAgaDIB1_00\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"xqmyw2yj2h1lbdfv\",\"time\":1754309779.496,\"distinct_id\":59637225,\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"$user_id\":59637225,\"section\":\"Job Card\",\"page\":\"/candidate/jobs\",\"isLoggedIn\":null,\"jobId\":1224361029,\"JobTitle\":\"Software Engineer\",\"area\":\"\",\"city\":\"\",\"maxSalary\":0,\"minSalary\":0,\"userPlatform\":\"Apna Main Website\",\"Selected Filters\":{\"jobTypes\":{\"partTime\":0,\"workFromHome\":0,\"nightShift\":0,\"freshersJobs\":0,\"fullTime\":0,\"womenJobs\":0},\"city\":[{\"id\":-1,\"name\":\"\",\"slug\":\"all\"}],\"area\":[{\"id\":-1,\"name\":\"All\",\"slug\":\"all\"}],\"location\":{\"identifier\":\"64e4b869c35bd44248cbeb62\",\"type\":\"NBArea\",\"name\":\"Sector 15A, Faridabad\"},\"state_code\":\"\",\"category\":[{\"id\":-1,\"type\":\"All\",\"slug\":\"all\",\"job_count\":{\"total_jobs\":0,\"total_no_of_openings\":0}}],\"department\":[{\"id\":-1,\"type\":\"All\",\"slug\":\"all\",\"job_count\":{\"total_jobs\":0,\"total_no_of_openings\":0}}],\"salary\":\"\",\"workMode\":[],\"min_experience\":\"0\",\"workType\":[],\"workShift\":[],\"sortBy\":\"\",\"others\":\"\",\"postedIn\":0,\"distance\":\"\",\"educationLevel\":[{\"level\":\"5\"}],\"company\":[{\"id\":-1,\"name\":\"All\",\"slug\":\"all\"}],\"gender\":\"gender-m\",\"english_level\":\"Advanced English\",\"search\":true,\"searchEntity\":{\"entity_id\":\"259\",\"entity_type\":\"JobTitle\",\"display_name\":\"Software Developer\"},\"featured_jobs\":false},\"Is filter applied\":true,\"x position\":1,\"y position\":0,\"Page No\":1,\"Job Board Type\":\"Non Apna Job\",\"earning_potential\":0,\"is_wfh\":false,\"Job_company_name\":\"MIDLAND CREDIT MANAGEMENT INC.\",\"source\":\"Job Search Web\",\"tags_shown\":[\"Work from Office\",\"Full Time\",\"Freshers only\"],\"Search ID\":\"\",\"trafficChannel\":\"Internal Navigation\",\"isCrawler\":false,\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"deviceOS\":\"Other\",\"deviceType\":\"Desktop\",\"web_logged_in\":\"Yes\",\"profile_enriched\":true,\"userUID\":\"59637225\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}},{\"id\":\"13y1149c2onnwkga\",\"flushAfter\":1754309789498,\"payload\":{\"event\":\"Job Impression Web\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/candidate/jobs?c_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NjM3MjI1IiwiZXhwIjoxNzU0OTE0NTc4fQ.RAbk1J3qnmmL8_waoLXXHj6xTt3K7UZcHAgaDIB1_00\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"6sf3maqf0apjgg38\",\"time\":1754309779.497,\"distinct_id\":59637225,\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"$user_id\":59637225,\"section\":\"Job Card\",\"page\":\"/candidate/jobs\",\"isLoggedIn\":null,\"jobId\":1955568748,\"JobTitle\":\"Typescript Developer\",\"area\":\"\",\"city\":\"\",\"maxSalary\":0,\"minSalary\":0,\"userPlatform\":\"Apna Main Website\",\"Selected Filters\":{\"jobTypes\":{\"partTime\":0,\"workFromHome\":0,\"nightShift\":0,\"freshersJobs\":0,\"fullTime\":0,\"womenJobs\":0},\"city\":[{\"id\":-1,\"name\":\"\",\"slug\":\"all\"}],\"area\":[{\"id\":-1,\"name\":\"All\",\"slug\":\"all\"}],\"location\":{\"identifier\":\"64e4b869c35bd44248cbeb62\",\"type\":\"NBArea\",\"name\":\"Sector 15A, Faridabad\"},\"state_code\":\"\",\"category\":[{\"id\":-1,\"type\":\"All\",\"slug\":\"all\",\"job_count\":{\"total_jobs\":0,\"total_no_of_openings\":0}}],\"department\":[{\"id\":-1,\"type\":\"All\",\"slug\":\"all\",\"job_count\":{\"total_jobs\":0,\"total_no_of_openings\":0}}],\"salary\":\"\",\"workMode\":[],\"min_experience\":\"0\",\"workType\":[],\"workShift\":[],\"sortBy\":\"\",\"others\":\"\",\"postedIn\":0,\"distance\":\"\",\"educationLevel\":[{\"level\":\"5\"}],\"company\":[{\"id\":-1,\"name\":\"All\",\"slug\":\"all\"}],\"gender\":\"gender-m\",\"english_level\":\"Advanced English\",\"search\":true,\"searchEntity\":{\"entity_id\":\"259\",\"entity_type\":\"JobTitle\",\"display_name\":\"Software Developer\"},\"featured_jobs\":false},\"Is filter applied\":true,\"x position\":0,\"y position\":1,\"Page No\":1,\"Job Board Type\":\"Non Apna Job\",\"earning_potential\":0,\"is_wfh\":false,\"Job_company_name\":\"Aristocrat Technologies\",\"source\":\"Job Search Web\",\"tags_shown\":[\"Work from Office\",\"Full Time\",\"Freshers\"],\"Search ID\":\"\",\"trafficChannel\":\"Internal Navigation\",\"isCrawler\":false,\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"deviceOS\":\"Other\",\"deviceType\":\"Desktop\",\"web_logged_in\":\"Yes\",\"profile_enriched\":true,\"userUID\":\"59637225\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}},{\"id\":\"g78zlijcaz1tdgvo\",\"flushAfter\":1754309789499,\"payload\":{\"event\":\"Job Impression Web\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/candidate/jobs?c_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NjM3MjI1IiwiZXhwIjoxNzU0OTE0NTc4fQ.RAbk1J3qnmmL8_waoLXXHj6xTt3K7UZcHAgaDIB1_00\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"vo1awc3ro4tgsabm\",\"time\":1754309779.499,\"distinct_id\":59637225,\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"$user_id\":59637225,\"section\":\"Job Card\",\"page\":\"/candidate/jobs\",\"isLoggedIn\":null,\"jobId\":1137448089,\"JobTitle\":\"Typescript Developer\",\"area\":\"\",\"city\":\"\",\"maxSalary\":0,\"minSalary\":0,\"userPlatform\":\"Apna Main Website\",\"Selected Filters\":{\"jobTypes\":{\"partTime\":0,\"workFromHome\":0,\"nightShift\":0,\"freshersJobs\":0,\"fullTime\":0,\"womenJobs\":0},\"city\":[{\"id\":-1,\"name\":\"\",\"slug\":\"all\"}],\"area\":[{\"id\":-1,\"name\":\"All\",\"slug\":\"all\"}],\"location\":{\"identifier\":\"64e4b869c35bd44248cbeb62\",\"type\":\"NBArea\",\"name\":\"Sector 15A, Faridabad\"},\"state_code\":\"\",\"category\":[{\"id\":-1,\"type\":\"All\",\"slug\":\"all\",\"job_count\":{\"total_jobs\":0,\"total_no_of_openings\":0}}],\"department\":[{\"id\":-1,\"type\":\"All\",\"slug\":\"all\",\"job_count\":{\"total_jobs\":0,\"total_no_of_openings\":0}}],\"salary\":\"\",\"workMode\":[],\"min_experience\":\"0\",\"workType\":[],\"workShift\":[],\"sortBy\":\"\",\"others\":\"\",\"postedIn\":0,\"distance\":\"\",\"educationLevel\":[{\"level\":\"5\"}],\"company\":[{\"id\":-1,\"name\":\"All\",\"slug\":\"all\"}],\"gender\":\"gender-m\",\"english_level\":\"Advanced English\",\"search\":true,\"searchEntity\":{\"entity_id\":\"259\",\"entity_type\":\"JobTitle\",\"display_name\":\"Software Developer\"},\"featured_jobs\":false},\"Is filter applied\":true,\"x position\":0,\"y position\":0,\"Page No\":1,\"Job Board Type\":\"Non Apna Job\",\"earning_potential\":0,\"is_wfh\":false,\"Job_company_name\":\"Aristocrat Technologies\",\"source\":\"Job Search Web\",\"tags_shown\":[\"Work from Office\",\"Full Time\",\"Freshers\"],\"Search ID\":\"\",\"trafficChannel\":\"Internal Navigation\",\"isCrawler\":false,\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"deviceOS\":\"Other\",\"deviceType\":\"Desktop\",\"web_logged_in\":\"Yes\",\"profile_enriched\":true,\"userUID\":\"59637225\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}},{\"id\":\"69mld0xmxk0akhoj\",\"flushAfter\":1754309789398,\"payload\":{\"event\":\"Page View\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/candidate/jobs?c_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NjM3MjI1IiwiZXhwIjoxNzU0OTE0NTc4fQ.RAbk1J3qnmmL8_waoLXXHj6xTt3K7UZcHAgaDIB1_00\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"uwytbhq66t2pxp2e\",\"time\":1754309779.398,\"distinct_id\":59637225,\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"$user_id\":59637225,\"Source\":\"Job Listing Page\",\"pageType\":\"Job List\",\"city\":\"All\",\"area\":\"All\",\"category\":\"All\",\"state\":\"All\",\"page\":\"/candidate/jobs\",\"workFromHome\":false,\"partTime\":false,\"womenJob\":false,\"freshersJob\":false,\"trafficChannel\":\"Internal Navigation\",\"isCrawler\":false,\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"deviceOS\":\"Other\",\"deviceType\":\"Desktop\",\"userPlatform\":\"Apna Main Website\",\"web_logged_in\":\"Yes\",\"profile_enriched\":true,\"userUID\":\"59637225\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}},{\"id\":\"tbcgfro0j75ne446\",\"flushAfter\":1754309789396,\"payload\":{\"event\":\"Download app card shown\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/candidate/jobs?c_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NjM3MjI1IiwiZXhwIjoxNzU0OTE0NTc4fQ.RAbk1J3qnmmL8_waoLXXHj6xTt3K7UZcHAgaDIB1_00\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"19w6tsbdtkyxk67n\",\"time\":1754309779.396,\"distinct_id\":59637225,\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"$user_id\":59637225,\"Screen\":\"Job Search Web\",\"trafficChannel\":\"Internal Navigation\",\"isCrawler\":false,\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"deviceOS\":\"Other\",\"deviceType\":\"Desktop\",\"userPlatform\":\"Apna Main Website\",\"web_logged_in\":\"Yes\",\"profile_enriched\":true,\"userUID\":\"59637225\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}},{\"id\":\"gcl3swo8241zk0w7\",\"flushAfter\":1754309789392,\"payload\":{\"event\":\"Edit preferred role screen shown web\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/candidate/jobs?c_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NjM3MjI1IiwiZXhwIjoxNzU0OTE0NTc4fQ.RAbk1J3qnmmL8_waoLXXHj6xTt3K7UZcHAgaDIB1_00\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"uuncf4dskbnoncrm\",\"time\":1754309779.392,\"distinct_id\":59637225,\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"$user_id\":59637225,\"source\":\"Job Feed Search\",\"trafficChannel\":\"Internal Navigation\",\"isCrawler\":false,\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"deviceOS\":\"Other\",\"deviceType\":\"Desktop\",\"userPlatform\":\"Apna Main Website\",\"web_logged_in\":\"Yes\",\"profile_enriched\":true,\"userUID\":\"59637225\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}},{\"id\":\"4wwh72arp1p37q4b\",\"flushAfter\":1754309789392,\"payload\":{\"event\":\"Edit job preferences screen shown web\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/candidate/jobs?c_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NjM3MjI1IiwiZXhwIjoxNzU0OTE0NTc4fQ.RAbk1J3qnmmL8_waoLXXHj6xTt3K7UZcHAgaDIB1_00\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"a29bpf0igdljkm2u\",\"time\":1754309779.391,\"distinct_id\":59637225,\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"$user_id\":59637225,\"source\":\"Job Feed Search\",\"trafficChannel\":\"Internal Navigation\",\"isCrawler\":false,\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"deviceOS\":\"Other\",\"deviceType\":\"Desktop\",\"userPlatform\":\"Apna Main Website\",\"web_logged_in\":\"Yes\",\"profile_enriched\":true,\"userUID\":\"59637225\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}},{\"id\":\"cvueb0xcmhdc212y\",\"flushAfter\":1754309789397,\"payload\":{\"event\":\"Search Query Fetched Web\",\"properties\":{\"$os\":\"Windows\",\"$browser\":\"Chrome\",\"$current_url\":\"https://apna.co/candidate/jobs?c_id=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NjM3MjI1IiwiZXhwIjoxNzU0OTE0NTc4fQ.RAbk1J3qnmmL8_waoLXXHj6xTt3K7UZcHAgaDIB1_00\",\"$browser_version\":139,\"$screen_height\":720,\"$screen_width\":1280,\"mp_lib\":\"web\",\"$lib_version\":\"2.67.0\",\"$insert_id\":\"189e0us35e6esnti\",\"time\":1754309779.397,\"distinct_id\":59637225,\"$device_id\":\"7f2293ae-1309-40cc-975a-8606c394eb16\",\"$initial_referrer\":\"$direct\",\"$initial_referring_domain\":\"$direct\",\"$user_id\":59637225,\"num_main_bucket_jobs\":234,\"Zero Search Results\":false,\"num_other_bucket_jobs\":0,\"User Entered Query\":\"Software Developer\",\"Entity Type\":\"JobTitle\",\"User Entered Location Query\":\"Sector 15A, Faridabad\",\"Location Type\":\"NBArea\",\"Location Search Feature Used\":\"Default\",\"Web_Job_Source\":\"Job Search Web\",\"is_sorting_applied_search\":false,\"is_filter_applied_search\":true,\"filters_applied\":true,\"Prefilled_Location\":\"\",\"Selected Filters\":[{\"postedIn\":\"All\"}],\"Is filter applied\":true,\"filters auto applied\":true,\"auto applied filters\":[{\"name\":\"min_experience\",\"selected_value\":\"0\"},{\"name\":\"education_level\",\"selected_value\":\"5\"},{\"name\":\"english_level\",\"selected_value\":\"Advanced English\"},{\"name\":\"gender\",\"selected_value\":\"gender-m\"}],\"User entered experience in years\":\"0\",\"User entered experience\":true,\"Is experience filter manually applied\":\"No\",\"Is location filter manually applied\":\"No\",\"Suggestion type\":\"explicit\",\"auto suggested entity id\":\"\",\"auto suggested entity type\":\"\",\"Search ID\":\"\",\"trafficChannel\":\"Internal Navigation\",\"isCrawler\":false,\"userAgent\":\"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36\",\"deviceOS\":\"Other\",\"deviceType\":\"Desktop\",\"userPlatform\":\"Apna Main Website\",\"web_logged_in\":\"Yes\",\"profile_enriched\":true,\"userUID\":\"59637225\",\"token\":\"b96e1914cc08adb5d3332330e947ca74\"}}}]"
+        },
+        {
+          "name": "lastExternalReferrer",
+          "value": "empty"
+        },
+        {
+          "name": "APNA_SHARED_STORE:AUTH",
+          "value": "{\"state\":{\"isUserAuthenticated\":true,\"userPhoneNumber\":\"9058145299\",\"userAuthToken\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjU5NjM3MjI1IiwiZXhwIjoxNzU0OTE0NTc4fQ.RAbk1J3qnmmL8_waoLXXHj6xTt3K7UZcHAgaDIB1_00\"},\"version\":0}"
+        },
+        {
+          "name": "SEARCH_SESSION_ID",
+          "value": "d52728a8-6385-473c-b7ee-fda4f319967b"
+        },
+        {
+          "name": "mobile_number",
+          "value": "9058145299"
+        }
+      ]
+    }
+  ]
+}

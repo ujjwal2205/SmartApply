@@ -1,12 +1,12 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef,useContext } from "react";
 import "./Navbar.css";
 import { FaUserCircle } from "react-icons/fa";
 import { Link} from "react-router-dom";
-
+import { StoreContext } from "../../context/StoreContext";
 function Navbar({ login, setLogin }) {
   const [dropdown, setDropdown] = useState(false);
   const dropdownRef = useRef(null);
-
+  const {setToken}=useContext(StoreContext);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -16,10 +16,17 @@ function Navbar({ login, setLogin }) {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
+    if(localStorage.getItem("token")){
+       setLogin(true);
+    }
   },[]);
 
   const toggleDropdown = () => setDropdown((prev) => !prev);
-
+  const handleLogout=()=>{
+    localStorage.removeItem("token");
+    setLogin(false);
+    setToken("");
+  }
   return (
     <div className="navbar">
       <a href="/" className="navbar-logo">
@@ -42,7 +49,7 @@ function Navbar({ login, setLogin }) {
             </div>
             <div className={`user-dropdown ${dropdown ? "show" : ""}`}>
               <Link to="/dashboard/jobsInfo" onClick={()=>setDropdown(false)}>Dashboard</Link>
-              <Link to="/" className="logout-btn" onClick={() => setLogin(false)}>Logout</Link>
+              <Link to="/" className="logout-btn" onClick={handleLogout}>Logout</Link>
             </div>
           </div>
         ) : (

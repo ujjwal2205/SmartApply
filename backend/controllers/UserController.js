@@ -4,12 +4,12 @@ import validator from "validator";
 import jwt from "jsonwebtoken";
 import express from "express";
 import verifyGoogleToken from "../middleware/auth.js";
-const createToken=(id)=>{
-    return jwt.sign({id},process.env.JWT_SECRET);
+const createToken=(email)=>{
+    return jwt.sign({email:email},process.env.JWT_SECRET);
 } 
 //sign up user
 const signUpUser=async(req,res)=>{
-    const {firstName,middleName,lastName,email,password}=req.body;
+    const {firstName,middleName,lastName,email,password,confirmPassword}=req.body;
     try{
         // if user already exists
         const normalizedEmail=email.toLowerCase();
@@ -20,6 +20,9 @@ const signUpUser=async(req,res)=>{
         //if email is valid
         if(!validator.isEmail(email)){
             return res.json({success:false,message:"Please Enter a valid email"})
+        }
+        if(password!==confirmPassword){
+            return res.json({success:false,message:"Passwords do not match"});
         }
         if(password.length<8){
             return res.json({success:false,message:"Please Enter a Strong Password"});
@@ -35,8 +38,8 @@ const signUpUser=async(req,res)=>{
             authType:"local"
         })
         await newUser.save();
-        const token=createToken(newUser._id);
-        res.json({success:true,message:"Signed In Successfully",token});
+        const token=createToken(normalizedEmail);
+        res.json({success:true,token});
     }
     catch(error){
         console.log(error);
@@ -60,7 +63,7 @@ const login= async (req,res)=>{
         if(!isMatch){
             return res.json({success:false,message:"Invalid credentials"});
         }
-        const token=createToken(user._id);
+        const token=createToken(normalizedEmail);
         res.json({success:true,token});
     }
     catch(error){
@@ -85,7 +88,7 @@ const googleLogin= async (req,res)=>{
         });
     await user.save();
     }
-     const token= createToken(user._id)
+     const token= createToken(normalizeEmail)
      res.json({status:true,token});
  }
  catch(error){

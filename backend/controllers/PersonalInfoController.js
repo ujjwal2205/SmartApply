@@ -1,8 +1,8 @@
 import userInfoModel from "../models/PersonalInfoModel.js";
 const userInfo=async(req,res)=>{
-const {email,preferredLocations,preferredRoles,Availability,priorExperience,workFromHome,aboutYourSelf,whyShouldWeHireYou,resume}=req.body;
+const {preferredLocations,preferredRoles,Availability,priorExperience,workFromHome,aboutYourSelf,whyShouldWeHireYou,resume}=req.body;
 try{
-    const normalizedEmail=email.toLowerCase();
+    const normalizedEmail=req.body.email.toLowerCase();
     const exist= await userInfoModel.findOne({email:normalizedEmail});
     if(exist){
         await userInfoModel.updateOne(
