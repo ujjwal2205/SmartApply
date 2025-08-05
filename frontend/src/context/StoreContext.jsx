@@ -3,8 +3,23 @@ export const StoreContext=createContext();
 function StoreProvider(props) {
     const url="http://localhost:4000";
     const [token,setToken]=useState("");
+    const [userData,setUserData]=useState({
+      firstName:"",
+      middleName:"",
+      lastName:"",
+      location:"",
+      preferredRole:"",
+      workFromHome:"",
+      whyHire:"",
+      resume:null,
+    })
+    const [portals,setPortals] = useState(
+  {"ApnaJobs":false,
+  "Naukri":false,
+  "Internshala":false}
+);
     const contextValue={
-        url,setToken
+        url,setToken,token,userData,setUserData,portals,setPortals
     }
   return (
     <StoreContext.Provider value={contextValue}>

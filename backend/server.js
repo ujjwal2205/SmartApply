@@ -4,6 +4,7 @@ import {connectDB} from "./config/db.js"
 import userRouter from "./routes/UserRoute.js";
 import userRoute from "./routes/PersonalInfoRoute.js";
 import jobsRouter from "./routes/AppliedJobsRoute.js";
+import userDataRoute from "./routes/UserDataRoute.js";
 import 'dotenv/config'
 //app config
 const app=express();
@@ -19,6 +20,7 @@ app.get("/",(req,res)=>{
 app.use("/api/user",userRouter)
 app.use("/api",userRoute)
 app.use("/api/dashboard",jobsRouter);
+app.use("/api/fetch",userDataRoute);
 app.listen(port,()=>{
     console.log(`Server started on http://localhost:${port}`)
 })

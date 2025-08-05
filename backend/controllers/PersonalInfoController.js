@@ -1,6 +1,6 @@
 import userInfoModel from "../models/PersonalInfoModel.js";
 const userInfo=async(req,res)=>{
-const {preferredLocations,preferredRoles,Availability,priorExperience,workFromHome,aboutYourSelf,whyShouldWeHireYou,resume}=req.body;
+const {location,preferredRole,workFromHome,whyHire,resume}=req.body;
 try{
     const normalizedEmail=req.body.email.toLowerCase();
     const exist= await userInfoModel.findOne({email:normalizedEmail});
@@ -8,13 +8,10 @@ try{
         await userInfoModel.updateOne(
             {email:normalizedEmail},
             {
-            preferredLocations:preferredLocations,
-            preferredRoles:preferredRoles,
-            Availability:Availability,
-            priorExperience:priorExperience,
+            location:location,
+            preferredRole:preferredRole,
             workFromHome:workFromHome,
-            aboutYourSelf:aboutYourSelf,
-            whyShouldWeHireYou:whyShouldWeHireYou,
+            whyHire:whyHire,
             resume:{
                 name:req.file.originalname,
                 data:req.file.buffer,
@@ -25,13 +22,10 @@ try{
     else{
         const newUser=new userInfoModel({
             email:normalizedEmail,
-            preferredLocations:preferredLocations,
-            preferredRoles:preferredRoles,
-            Availability:Availability,
-            priorExperience:priorExperience,
+            location:location,
+            preferredRole:preferredRole,
             workFromHome:workFromHome,
-            aboutYourSelf:aboutYourSelf,
-            whyShouldWeHireYou:whyShouldWeHireYou,
+            whyHire:whyHire,
             resume:{
                 name:req.file.originalname,
                 data:req.file.buffer,

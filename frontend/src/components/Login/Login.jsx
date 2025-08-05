@@ -10,7 +10,7 @@ import './Login.css'
 function Login({ login, setLogin }) {
   const [showPassword,setShowPassword]=useState(false);
 
-  const {url,setToken}=useContext(StoreContext);
+  const {url,setToken,setUserData}=useContext(StoreContext);
   const [data,setData]=useState({
     email:"",
     password:""
@@ -19,22 +19,37 @@ function Login({ login, setLogin }) {
   const handleSubmit = async(e) => {
     e.preventDefault();
     const response=await axios.post(url+"/api/user/login",data);
-   if(response.data.success){
-     setLogin(true);
-     setToken(response.data.token);
-     localStorage.setItem("token",response.data.token);
-     navigate('/information',{state:{toastMessage:"Login Successful!"}});
-   }
-   else{
-    setLogin(false);
-    toast.error(response.data.message);
-   }
+    if(response.data.success){
+      setLogin(true);
+      setToken(response.data.token);
+      localStorage.setItem("token",response.data.token);
+      const userData=await axios.post(url+"/api/fetch/userData",{},{
+      headers:{
+        Authorization:`Bearer ${response.data.token}`
+      }
+      })
+      if(userData.data.success){
+       setUserData({
+        ...userData.data.data.info,
+        ...userData.data.data.user
+      });
+       navigate('/information',{state:{toastMessage:"Login Successful!"}});
+      }
+      else{
+        toast.error(userData.data.message);
+        return;
+      }
+    }
+    else{
+     setLogin(false);
+     toast.error(response.data.message);
+    }
   };
   const handleCross=()=>{
     setLogin(false);
     navigate('/');
   }
-  const handleChange=async(e)=>{
+  const handleChange=(e)=>{
     const name=e.target.name;
     const value=e.target.value;
     setData({...data,[name]:value})

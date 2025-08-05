@@ -9,7 +9,7 @@ import { StoreContext } from '../../context/StoreContext';
 import { toast } from 'react-toastify';
 function SignUp({setLogin}) {
     const navigate = useNavigate();
-    const {url,setToken}=useContext(StoreContext);
+    const {url,setToken,setUserData}=useContext(StoreContext);
     const [formData,setFormData]=useState(
         {
             firstName:'',
@@ -42,7 +42,23 @@ function SignUp({setLogin}) {
       if(response.data.success){
         setToken(response.data.token);
         localStorage.setItem("token",response.data.token);
-        setShowNote(true);
+        const userData=await axios.post(url+"/api/fetch/userData",{},{
+          headers:{
+            Authorization: `Bearer ${response.data.token}`
+          }
+        })
+        if(userData.data.success){
+          setUserData({
+            ...userData.data.data.info,
+            ...userData.data.data.user
+          })
+          setShowNote(true);
+        }
+          else{
+                  toast.error(userData.data.message);
+                  return;
+                }
+        
       }
       else{
         toast.error(response.data.message);

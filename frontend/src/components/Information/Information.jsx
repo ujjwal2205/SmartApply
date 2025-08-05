@@ -1,11 +1,14 @@
-import React,{useState,useEffect} from 'react'
+import React,{useState,useEffect,useContext} from 'react'
 import { useNavigate } from 'react-router-dom';
 import './Information.css'
 import {toast} from 'react-toastify';
 import { useLocation } from 'react-router-dom';
 import Select from 'react-select'
 import cityOptions from '../../../cities.json'
+import axios from "axios";
+import { StoreContext } from '../../context/StoreContext';
 function Information() {
+  const [spinner,setSpinner]=useState(true);
   const preferredRoles = [
   { value: "frontend_developer", label: "Frontend Development" },
   { value: "backend_developer", label: "Backend Development" },
@@ -26,7 +29,8 @@ function Information() {
   { value: "game_development", label: "Game Development" },
   { value: "Cyber_Security", label: "Cyber Security" },
 ];
-
+    const {url,token,userData,setUserData,portals,setPortals}=useContext(StoreContext)
+    console.log(userData);
     const location = useLocation();
     const navigate=useNavigate();
      useEffect(() => {
@@ -36,31 +40,48 @@ function Information() {
     }
   }, [location,navigate]);
     const MAX_FILE_SIZE = 300 * 1024; // 300 KB
-     const [form,setForm] = useState({
-    firstName: "",
-    middleName: "",
-    lastName: "",
-    location: "",
-    preferredRole: "",
-    availability: "",
-    experience: "",
-    workFromHome: "Yes",
-    about: "",
-    whyHire: "",
-    resume: null,
-  });
-    const portals = [
-  { name: "LinkedIn",status:false},
-  { name: "Naukri", status:false},
-  { name: "Internshala", status:false},
-];
+    
    useEffect(()=>{
-    for(let i=0;i<portals.length;i++){
-      if(portals[i].status==false){
-        toast.error(`Alert: Your ${portals[i].name} account is not logged in. Some features may not work until you sign in!`);
-      }
+    const checkSessions=async()=>{
+      try{
+    const apnaJobs=await axios.post("http://localhost:5000/apply/ApnaJobsCheck");
+    if(apnaJobs.data.success){
+      setPortals(prev=>({...prev,ApnaJobs:true}));
     }
+    else{
+        setPortals(prev=>({...prev,ApnaJobs:false}));
+    }
+    const internshala=await axios.post("http://localhost:5000/apply/InternshalaCheck");
+    if(internshala.data.success){
+      setPortals(prev=>({...prev,Internshala:true}));
+    }
+    else{
+      setPortals(prev=>({...prev,Internshala:false}));
+    }
+    const naukri=await axios.post("http://localhost:5000/apply/NaukriCheck");
+    if(naukri.data.success){
+      setPortals(prev=>({...prev,Naukri:true}));
+    }
+    else{
+      setPortals(prev=>({...prev,Naukri:false}));
+    }}
+     catch(error){
+      console.log(error);
+     }
+    finally {
+      setSpinner(false);
+    }};
+     checkSessions();
+     
    },[])
+   useEffect(()=>{
+    if(spinner==false){
+     Object.entries(portals).forEach(([portal, status])=>{
+      if(status==false){
+        toast.error(`Alert: Your ${portal} account is not logged in.Please click on the button for sign in.`);
+       }
+   });
+}},[spinner])
    const handleFileChange=(e)=>{
     const file=e.target.files[0]
     if(!file){
@@ -69,16 +90,37 @@ function Information() {
     if(file.size>MAX_FILE_SIZE){
         toast.error("File must be less than or equal to 300 KB.");
         e.target.value=null;
-        setForm(prev => ({ ...prev, resume: null}));
+        setUserData(prev => ({ ...prev, resume: null}));
         return;
     }
-      setForm(prev => ({ ...prev, resume: file }));
+      setUserData(prev => ({ ...prev, resume: file }));
    }
-   const handleSubmit=(e)=>{
+   const handleSubmit=async(e)=>{
     e.preventDefault();
-    navigate("/dashboard/jobsInfo",{state:{toastMessage:"Applied Successfully!"}})
+    const formData=new FormData();
+    formData.append("firstName",userData.firstName);
+    formData.append("middleName",userData.middleName);
+    formData.append("lastName",userData.lastName);
+    formData.append("location",userData.location);
+    formData.append("preferredRole",userData.preferredRole);
+    formData.append("workFromHome",userData.workFromHome);
+    formData.append("whyHire",userData.whyHire);
+    formData.append("resume",userData.resume);
+    const response=await axios.post(url+"/api/information",formData,{
+      headers:{
+        Authorization:`Bearer ${token}`,
+        "Content-Type":"multipart/form-data"
+      }
+    });
+    if(response.data.success){
+      navigate("/dashboard/jobsInfo",{state:{toastMessage:"Applied Successfully!"}})
+    }
+    else{
+      toast.error(response.data.message);
+    }
    }
    const handleChange=(selectedOption)=>{
+    setUserData(prev=>({...prev,location:selectedOption.label}));
     console.log("Selected:", selectedOption);
    }
    const options = 
@@ -88,21 +130,26 @@ function Information() {
       label:city.name,
     })).sort((a, b) => a.label.localeCompare(b.label));
     const handleChangePrefferedRoles=(selectedOption)=>{
+      setUserData(prev=>({...prev,preferredRole:selectedOption.label}));
       console.log("Selected:",selectedOption);
     }
+    const handleTextChange=(e)=>{
+      const name=e.target.name;
+      const value=e.target.value;
+      setUserData(prev=>({...prev,[name]:value}));
+    }
     return (
+      spinner?<div className="spinner-container">
+        <div className="spinner"></div>
+        <p className="spinner-text">
+        Checking your login sessions across all job portals. This may take a few seconds...
+        </p>
+      </div>:(<>
      <div className='information-page'>   
     <div className='portals'>
-      {portals.map((portal, index) => (
-      <div key={index} className="portal-status">
-       <b className="portal-name">{portal.name}:</b>
-        {portal.status ? (
-        <b className="signed-in">Signed In</b>
-        ) : (
-        <b className="not-signed-in">Not Signed In</b>
-        )}
-        </div>
-        ))}
+      {Object.entries(portals).map((([portal, status]) => (
+      !status&&<button key={portal} className='portalExpiredButton'>{portal} Login</button>
+        )))}
     </div>
     <h1>Your Information</h1>
     <form className='personalDetails' onSubmit={handleSubmit}>
@@ -111,6 +158,8 @@ function Information() {
         type="text"
         name="firstName"
         placeholder='First Name*'
+        onChange={handleTextChange}
+        value={userData.firstName}
         required
      />
      <input
@@ -118,12 +167,16 @@ function Information() {
         type="text"
         name="middleName"
         placeholder='Middle Name'
+        onChange={handleTextChange}
+        value={userData.middleName}
      />
      <input
         className='input'
         type="text"
         name="lastName"
         placeholder='Last Name*'
+        onChange={handleTextChange}
+        value={userData.lastName}
         required
      />
      <Select
@@ -139,21 +192,11 @@ function Information() {
         placeholder='Enter your preffered roles*'
         required
      />
-     <select name="availability" className="input" required>
-          <option value="">Confirm your availability*</option>
-          <option>Yes, I am available to join immediately</option>
-          <option>No, I am currently on notice period</option>
-          <option>No, I will have to serve notice period</option>
-        </select>
-        <select name="experience" className="input" required>
-          <option value="">Do you have prior experience?*</option>
-          <option>Yes</option>
-          <option>No</option>
-        </select>
-        <select name="workFromHome" className="input" required>
+        <select name="workFromHome" className="input" onChange={handleTextChange} required>
           <option value="Yes">Open to Work From Home?</option>
-          <option>Yes</option>
-          <option>No</option>
+          <option value="Yes">Yes</option>
+          <option value="No">No</option>
+          
         </select>
         <div className="resumeUpload">
        <label className="resumeLabel" htmlFor="resume">
@@ -167,15 +210,24 @@ function Information() {
        className="input resumeInput"
        required
        />
-       {form.resume && (
+       {userData.resume && (
        <div className="resumePreview">
-        📄 {form.resume.name}
+        📄 {userData.resume.name}
        <button
        type="button"
        className="viewBtn"
        onClick={() => {
-       const fileURL = URL.createObjectURL(form.resume);
-       window.open(fileURL, '_blank');
+        if (userData.resume instanceof File) {
+        // Case 1: Freshly uploaded resume
+        const fileURL = URL.createObjectURL(userData.resume);
+        window.open(fileURL, '_blank');
+       } else if (userData.resume.data.data) {
+      // Case 2: Resume from DB (Buffer data)
+      const byteArray = new Uint8Array(userData.resume.data.data);
+      const blob = new Blob([byteArray], { type: userData.resume.contentType || 'application/pdf' });
+      const fileURL = URL.createObjectURL(blob);
+      window.open(fileURL, '_blank');
+    }
        }}
        >
        View
@@ -184,17 +236,12 @@ function Information() {
       )}
        <p className="resumeNote">Upload resume in PDF only. Max size: 300 KB</p>
       </div>
-       <textarea
-        name="about"
-        placeholder='Tell me about yourself*'
-        className='textArea'
-        required
-       />
-       <textarea name="whyHire" placeholder="Mention in detail what relevant skill or past experience you have for the internship. What excites you about the internship?*"  className="textArea" required />
+       <textarea name="whyHire" value={userData.whyHire} onChange={handleTextChange} placeholder="Mention in detail what relevant skill or past experience you have for the internship. What excites you about the internship?*"  className="textArea" required />
        <button type="submit" className='button'>Save & Continue</button>
     </form>
     </div>
-  )
+    </>
+  ))
 }
 
 export default Information

@@ -12,7 +12,7 @@ import fs from 'fs';
   console.log('Please log in manually...');
 
   // ✅ Wait until redirected to homepage after login
-   await page.waitForURL('**/candidate/**', { timeout: 600000 });
+   await page.waitForURL('**/candidate/**', { timeout: 60000 });
 
 
   // ✅ Just in case some cookies are added after homepage load
