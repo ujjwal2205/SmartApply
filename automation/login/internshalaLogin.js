@@ -1,7 +1,6 @@
 import { chromium } from 'playwright';
-import fs from 'fs';
-
-(async () => {
+const internshalaLogin=async () => { 
+  try{
   const context = await chromium.launchPersistentContext('UserData/internshalaUserData', {
     headless: false,
     args: ['--disable-blink-features=AutomationControlled'],
@@ -9,19 +8,32 @@ import fs from 'fs';
 
   const page = await context.newPage();
   await page.goto('https://www.internshala.com/');
+  await page.waitForLoadState('load');
+  
+  
+  if(page.url().includes("/dashboard")){
+    
+    await context.close();
+    return ({success:true,message:"Logged In"});
+  }
+ 
+       await page.waitForURL('**/dashboard', { timeout: 60000 });
+  
+      if (page.url().includes("/dashboard")) {
+   
+        await context.close();
+        return { success: true, message: "Logged In" };
+      }
+      else{
 
-  console.log('Please log in manually...');
-
-  // ✅ Wait for dashboard page after login
-  await page.waitForURL('**/dashboard', { timeout: 60000 });
-
-  // ✅ Optional wait for any extra cookies or localStorage updates
-  await page.waitForTimeout(1000);
-
-  // ✅ Save session state
-  const storage = await context.storageState();
-  fs.writeFileSync('./sessions/internshalaSessions.json', JSON.stringify(storage,null,2));  //storage=>konsa data ko string me convert krna hai 
-  // null=> koi filter lgana hai??
-  // har line me 2 spaces ka gap taaki neat dikhe
-  await context.close();
-})();
+        await context.close();
+        return { success: false, message: "Timeout waiting for login" };
+      }
+  }
+  catch(error){
+     console.log(error);
+  return({success:false,message:error.message});
+  }
+    } 
+  
+export default internshalaLogin;

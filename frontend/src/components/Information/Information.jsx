@@ -29,7 +29,7 @@ function Information() {
   { value: "game_development", label: "Game Development" },
   { value: "Cyber_Security", label: "Cyber Security" },
 ];
-    const {url,token,userData,setUserData,portals,setPortals}=useContext(StoreContext)
+    const {url,token,userData,setUserData,portals,setPortals,automation}=useContext(StoreContext)
     console.log(userData);
     const location = useLocation();
     const navigate=useNavigate();
@@ -41,9 +41,9 @@ function Information() {
   }, [location,navigate]);
     const MAX_FILE_SIZE = 300 * 1024; // 300 KB
     
-   useEffect(()=>{
     const checkSessions=async()=>{
       try{
+    setSpinner(true);
     const apnaJobs=await axios.post("http://localhost:5000/apply/ApnaJobsCheck");
     if(apnaJobs.data.success){
       setPortals(prev=>({...prev,ApnaJobs:true}));
@@ -71,8 +71,8 @@ function Information() {
     finally {
       setSpinner(false);
     }};
+   useEffect(()=>{
      checkSessions();
-     
    },[])
    useEffect(()=>{
     if(spinner==false){
@@ -108,8 +108,7 @@ function Information() {
     formData.append("resume",userData.resume);
     const response=await axios.post(url+"/api/information",formData,{
       headers:{
-        Authorization:`Bearer ${token}`,
-        "Content-Type":"multipart/form-data"
+        Authorization:`Bearer ${token}`
       }
     });
     if(response.data.success){
@@ -138,6 +137,22 @@ function Information() {
       const value=e.target.value;
       setUserData(prev=>({...prev,[name]:value}));
     }
+    const handleClick=async(name)=>{
+      const response=await axios.post(automation+"/apply/"+name+"Login");
+      try{
+      if(response.data.success){
+        toast.success(response.data.message);
+        checkSessions();
+      }
+      else{
+        toast.error(response.data.message);
+      }
+    }
+    catch(error){
+      console.log(error);
+      toast.error(error.message);
+    }
+    }
     return (
       spinner?<div className="spinner-container">
         <div className="spinner"></div>
@@ -148,7 +163,7 @@ function Information() {
      <div className='information-page'>   
     <div className='portals'>
       {Object.entries(portals).map((([portal, status]) => (
-      !status&&<button key={portal} className='portalExpiredButton'>{portal} Login</button>
+      !status&&<button key={portal} className='portalExpiredButton' onClick={()=>handleClick(portal)}>{portal} Login</button>
         )))}
     </div>
     <h1>Your Information</h1>
@@ -192,7 +207,7 @@ function Information() {
         placeholder='Enter your preffered roles*'
         required
      />
-        <select name="workFromHome" className="input" onChange={handleTextChange} required>
+        <select name="workFromHome" className="input" onChange={handleTextChange} >
           <option value="Yes">Open to Work From Home?</option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
@@ -203,12 +218,12 @@ function Information() {
         Upload Resume
        </label>
       <input
-       type="file"
+       type="File"
        id="resume"
        accept=".pdf"
        onChange={handleFileChange}
        className="input resumeInput"
-       required
+       required={!userData.resume}
        />
        {userData.resume && (
        <div className="resumePreview">

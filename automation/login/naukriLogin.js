@@ -1,7 +1,7 @@
 import {chromium } from 'playwright';
 import fs from "fs"
 
-( async () => {
+const naukriLogin=async () => {
   const context = await chromium.launchPersistentContext('UserData/naukriUserData', {
   headless: false,
   args: ['--disable-blink-features=AutomationControlled'],
@@ -11,16 +11,22 @@ import fs from "fs"
   await page.goto('https://www.naukri.com');
 
   console.log('Please log in manually...');
+  if(page.url().includes("/homepage")){
+    await context.close();
+    return ({success:true,message:"Logged In"});
+  }
 
   // ✅ Wait until redirected to homepage after login
   await page.waitForURL('**/homepage**', { timeout: 6000000 });
-
   // ✅ Just in case some cookies are added after homepage load
   await page.waitForTimeout(1000);
-
-  // ✅ Save session state
-   const storage=await context.storageState();
-   fs.writeFileSync('./sessions/naukriSessions.json', JSON.stringify(storage,null,2));
-
-  await context.close();
-})();
+  if(page.url().includes("/homepage")){
+    await context.close();
+    return({success:true,message:"Logged In"});
+  }
+  else{
+    await context.close();
+    return({success:false,message:"Not Logged In"});
+  }
+};
+export default naukriLogin;

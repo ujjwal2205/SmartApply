@@ -9,6 +9,7 @@ const port=5000;
 app.use(express.json());
 app.use(cors());
 connectDB();
+
 app.post("/test", (req, res) => {
   res.json({ message: "Test POST working", body: req.body });
 });

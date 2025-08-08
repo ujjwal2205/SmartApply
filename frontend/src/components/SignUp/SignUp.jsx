@@ -71,9 +71,25 @@ function SignUp({setLogin}) {
                 const response=await axios.post("http://localhost:4000/api/user/googleLogin",{
                     idToken:token,
                 })
+                const userData=await axios.post(url+"/api/fetch/userData",{},{
+            headers:{
+             Authorization:`Bearer ${response.data.token}`
+              }
+              })
                 if(response.data.status){
                   setLogin(true);
+                  localStorage.setItem("token",token);
+                  if(userData.data.success){
+                  setUserData({
+                  ...userData.data.data.info,
+                  ...userData.data.data.user
+                  });
                   navigate('/information',{state:{toastMessage:"Login Successful!"}});
+                  }
+                  else{
+                  toast.error(userData.data.message);
+                  return;
+                  }
                 }
                 else{
                     setLogin(false);
