@@ -1,64 +1,94 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState,useEffect,useContext } from 'react'
 import './JobsInfo.css'
 import {useLocation,useNavigate} from 'react-router-dom';
 import { toast } from 'react-toastify';
+import { StoreContext } from '../../context/StoreContext';
+import axios from 'axios';
 function JobsInfo() {
   const location=useLocation();
   const navigate=useNavigate();
+  const [spinner,setSpinner]=useState(false);
+  const [flag,setFlag]=useState(true);
+  const {portals,setPortals,token,automation,url,jobs,setJobs}=useContext(StoreContext);
+  useEffect(()=>{
+    if(location.state?.toastMessage){
+      const runJobs=async()=>{
+      setSpinner(true);
+    try{
+      const promise=Object.entries(portals).map(([portal,status])=>{
+        if(status===true){
+          return applyJob(portal);
+        }
+      })
+      await Promise.all(promise);
+       const response=await axios.post(`${url}/api/Jobs/fetchJobs`,{},{
+         headers:{
+             Authorization:`Bearer ${token}`
+           }
+       });
+       if(response.data.success){
+         setJobs(response.data.data);
+       }
+       else{
+         console.log(response.data.message);
+         toast.error(response.data.message);
+       }
+     }
+     catch(error){
+       console.log(error);
+       toast.error(error.message);
+      }finally{
+        setSpinner(false);
+        setFlag(false); 
+      }
+    }
+      runJobs();
+    };
+  }
+  ,[]);
   useEffect(() => {
+      if(flag===false){
       if (location.state?.toastMessage) {
         toast.success(location.state.toastMessage);
         navigate(location.pathname, { replace: true, state: {} });
-      }
-    }, [location,navigate]);
-  const dummyJobs = [
-    {
-      title: "Frontend Developer",
-      company: "Google",
-      portal: "Naukri",
-      status: "Applied"
-    },
-    {
-      title: "Software Intern",
-      company: "Internshala",
-      portal: "Internshala",
-      status: "Talking Stage"
+      }}
+    }, [location,navigate,flag]);
+  const applyJob=async(portal)=>{
+    try{
+      await axios.post(`${automation}/apply/${portal}`,{},{
+        headers:{
+          Authorization:`Bearer ${token}`
+        }
+      })
     }
-  ];
-  const portals = [
-    { name: "LinkedIn",status:false},
-    { name: "Naukri", status:false},
-    { name: "Internshala", status:false},
-  ];
-  const statuses = ["Applied", "Talking Stage", "Interview Scheduled", "No Reply"];
-  const [jobs,setJobs]=useState(dummyJobs);
+    catch(error){
+      console.log(error);
+    }
+  }
+  
   const [search,setSearch]=useState('');
   const [filter,setFilter]=useState('All');
-  const handleStatusChange=(index,newStatus)=>{
-    const updatedJobs = [...jobs];
-updatedJobs[index].status = newStatus;
-setJobs(updatedJobs);
-  }
   const filteredJobs=jobs.filter(jobs=>{
-    const matchSearch=jobs.title.toLowerCase().includes(search.trim().toLowerCase())||jobs.company.toLowerCase().includes(search.trim().toLowerCase());
+    const matchSearch=jobs.jobTitle.toLowerCase().includes(search.trim().toLowerCase())||jobs.company.toLowerCase().includes(search.trim().toLowerCase());
     const matchPortals=jobs.portal===filter||filter==='All';
     return matchSearch && matchPortals;
   })
-  const handlePortalLogin=()=>{
-    console.log("Redirecting");
-  }
+  
   return (
+    spinner?<div className='spinner-container'>
+      <div className='spinner'>
+      </div>
+        <p className='"spinner-text"'>
+          We’re applying for jobs on your behalf — sit tight, this won’t take long!
+        </p>
+    </div>:(<>
     <div className='jobsInfo'>
       <div className='topbar'>
         <div className='appliedJobsCard'>
         <h2>Total Applied Jobs:</h2>
         <h2>{filteredJobs.length}</h2>
         </div>
-        <div className='portal-status'>
-          {portals.map((p,i)=>
-            p.status==false&&<button key={i} className='portalButtonExpired'  onClick={() => handlePortalLogin(p.name)}>{p.name} Login</button>
-         )}
-        </div>
+        
       </div>
       <div className='controls'>
        <input
@@ -70,9 +100,10 @@ setJobs(updatedJobs);
        />
        <select value={filter} onChange={(e)=>setFilter(e.target.value)}>
         <option value="All">All Portals</option>
-        {portals.map((p,i)=>
-          <option key={i} value={p.name}>{p.name}</option>
-        )}
+        {Object.entries(portals).map(([portal,status])=>(
+          <option key={portal} value={portal}>{portal}</option>
+        ))
+        }
        </select>
       </div>
       <div className='jobsTable'>
@@ -82,22 +113,14 @@ setJobs(updatedJobs);
               <th>Job Title</th>
               <th>Company</th>
               <th>Portal</th>
-              <th>Status</th>
             </tr>
           </thead>
           <tbody>
             {filteredJobs.map((jobs,index)=>
              <tr key={index}>
-               <td>{jobs.title}</td>
+               <td>{jobs.jobTitle}</td>
                <td>{jobs.company}</td>
                <td>{jobs.portal}</td>
-               <td>
-                <select value={jobs.status} onChange={(e)=>handleStatusChange(index,e.target.value)}>
-                  {statuses.map((s, i) => (
-                      <option key={i} value={s}>{s}</option>
-                    ))}
-                </select>
-               </td>
              </tr>
             )}
             {filteredJobs.length==0 &&
@@ -109,6 +132,7 @@ setJobs(updatedJobs);
         </table>
       </div>
     </div>
+    </>)
   )
 }
 

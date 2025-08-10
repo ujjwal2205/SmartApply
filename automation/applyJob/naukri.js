@@ -15,9 +15,9 @@ const naukriJobs=async(email)=>{
         await page.locator("//span[@class='nI-gNb-sb__placeholder']").click();
         await page.locator("#jobType").click();
         await page.locator("li[title='Internship'] div span").click();
-        await page.locator("input[placeholder='Enter keyword / designation / companies']").fill(user.preferredRoles);
-        if(user.preferredLocations){
-            await page.locator("input[placeholder='Enter location']").fill(user.preferredLocations);
+        await page.locator("input[placeholder='Enter keyword / designation / companies']").fill(user.preferredRole);
+        if(user.location){
+            await page.locator("input[placeholder='Enter location']").fill(user.location);
         }
         await page.keyboard.press("Enter");
         let pageCounter=0;
@@ -31,7 +31,7 @@ const naukriJobs=async(email)=>{
         while(AppliedJobsCount<=10 && i<totalJobs){
           const card=jobCards.nth(i);
           let jobTitle=await card.locator("a.title").textContent();
-          let preferredRoles=user.preferredRoles.toLowerCase().split(" ").map(role=>role.trim());
+          let preferredRoles=user.preferredRole.toLowerCase().split(" ").map(role=>role.trim());
           let checkJobTitle=jobTitle.toLowerCase();
           let isMatching=preferredRoles.some(role=>checkJobTitle.includes(role));
           if(!isMatching){
@@ -86,6 +86,11 @@ const naukriJobs=async(email)=>{
     } catch (error) {
         console.log(error);
         return{success:false,message:error.message};
+    }
+    finally{
+        if(context){
+            await context.close();
+        }
     }
 }
 export default naukriJobs;

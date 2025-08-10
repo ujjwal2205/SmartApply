@@ -1,7 +1,6 @@
 import userInfoModel from "../../backend/models/PersonalInfoModel.js";
 import jobsInfoModel from "../../backend/models/AppliedJobsModel.js";
 import {chromium} from "playwright";
-import { isExternal } from "util/types";
 const apnaJobs=async(email)=>{
     const normalizedEmail=email.toLowerCase();
     const context=await chromium.launchPersistentContext('UserData/apnaJobsUserData',{
@@ -13,13 +12,16 @@ const apnaJobs=async(email)=>{
         let user=await userInfoModel.findOne({email:normalizedEmail});
         let appliedJobs=await jobsInfoModel.findOne({email:normalizedEmail});
         await page.goto("https://apna.co/");
-        await page.locator('input[class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd"]').first().pressSequentially(user.preferredRoles);
-        await page.locator('input[placeholder="Search for an area or city"]').pressSequentially(user.preferredLocations);
+        await page.locator('input[class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd"]').first().pressSequentially(user.preferredRole);
+        await page.waitForTimeout(1000);
+        if(user.location){
+        await page.locator('input[placeholder="Search for an area or city"]').pressSequentially(user.location);
         await page.waitForTimeout(1000);
         await page.keyboard.press("ArrowDown");
         await page.waitForTimeout(1000);
         await page.keyboard.press("Enter");
         await page.waitForTimeout(1000);
+        }
         await page.locator('[data-testid="search-button"]').click();
         await page.waitForLoadState('load');
         await page.locator("input[value='wfo']").click();
@@ -41,7 +43,7 @@ const apnaJobs=async(email)=>{
            let jobTitle=await currJob.locator("[data-testid='job-title']").textContent();
            let companyRaw=await currJob.locator("[data-testid='company-title']").textContent();
            let company=(companyRaw || "").trim();
-           let portal="Apna Jobs";
+           let portal="ApnaJobs";
            let job={
             jobTitle:jobTitle,
             company:company,
@@ -93,6 +95,11 @@ await applyBtn.first().click();
     } catch (error) {
         console.log(error);
         return ({success:false,message:error.message});
+    }
+    finally{
+        if(context){
+            await context.close();
+        }
     }
 }
 export default apnaJobs;

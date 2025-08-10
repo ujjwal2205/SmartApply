@@ -68,6 +68,7 @@ function Login({ login, setLogin }) {
             if(response.data.status){
               setLogin(true);
               localStorage.setItem("token",token);
+              setToken(token);
               if(userData.data.success){
               setUserData({
               ...userData.data.data.info,

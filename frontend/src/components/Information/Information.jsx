@@ -29,13 +29,13 @@ function Information() {
   { value: "game_development", label: "Game Development" },
   { value: "Cyber_Security", label: "Cyber Security" },
 ];
-    const {url,token,userData,setUserData,portals,setPortals,automation}=useContext(StoreContext)
-    console.log(userData);
+    const {url,token,userData,setUserData,portals,setPortals,automation}=useContext(StoreContext);
     const location = useLocation();
     const navigate=useNavigate();
      useEffect(() => {
     if (location.state?.toastMessage) {
       toast.success(location.state.toastMessage);
+      
       navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location,navigate]);
@@ -44,21 +44,21 @@ function Information() {
     const checkSessions=async()=>{
       try{
     setSpinner(true);
-    const apnaJobs=await axios.post("http://localhost:5000/apply/ApnaJobsCheck");
+    const apnaJobs=await axios.post(`${automation}/apply/ApnaJobsCheck`);
     if(apnaJobs.data.success){
       setPortals(prev=>({...prev,ApnaJobs:true}));
     }
     else{
         setPortals(prev=>({...prev,ApnaJobs:false}));
     }
-    const internshala=await axios.post("http://localhost:5000/apply/InternshalaCheck");
+    const internshala=await axios.post(`${automation}/apply/InternshalaCheck`);
     if(internshala.data.success){
       setPortals(prev=>({...prev,Internshala:true}));
     }
     else{
       setPortals(prev=>({...prev,Internshala:false}));
     }
-    const naukri=await axios.post("http://localhost:5000/apply/NaukriCheck");
+    const naukri=await axios.post(`${automation}/apply/NaukriCheck`);
     if(naukri.data.success){
       setPortals(prev=>({...prev,Naukri:true}));
     }
@@ -78,6 +78,7 @@ function Information() {
     if(spinner==false){
      Object.entries(portals).forEach(([portal, status])=>{
       if(status==false){
+
         toast.error(`Alert: Your ${portal} account is not logged in.Please click on the button for sign in.`);
        }
    });
@@ -97,6 +98,7 @@ function Information() {
    }
    const handleSubmit=async(e)=>{
     e.preventDefault();
+    console.log(userData.resume);
     const formData=new FormData();
     formData.append("firstName",userData.firstName);
     formData.append("middleName",userData.middleName);
@@ -105,7 +107,15 @@ function Information() {
     formData.append("preferredRole",userData.preferredRole);
     formData.append("workFromHome",userData.workFromHome);
     formData.append("whyHire",userData.whyHire);
+    if(userData.resume instanceof File){
     formData.append("resume",userData.resume);
+    }
+    else if (userData.resume.data.data) {
+      // Case 2: Resume from DB (Buffer data)
+      const byteArray = new Uint8Array(userData.resume.data.data);
+      const blob = new Blob([byteArray], { type: userData.resume.contentType || 'application/pdf' });
+      formData.append("resume",blob,userData.resume.name);
+    }
     const response=await axios.post(url+"/api/information",formData,{
       headers:{
         Authorization:`Bearer ${token}`
@@ -120,7 +130,6 @@ function Information() {
    }
    const handleChange=(selectedOption)=>{
     setUserData(prev=>({...prev,location:selectedOption.label}));
-    console.log("Selected:", selectedOption);
    }
    const options = 
     cityOptions
@@ -130,7 +139,6 @@ function Information() {
     })).sort((a, b) => a.label.localeCompare(b.label));
     const handleChangePrefferedRoles=(selectedOption)=>{
       setUserData(prev=>({...prev,preferredRole:selectedOption.label}));
-      console.log("Selected:",selectedOption);
     }
     const handleTextChange=(e)=>{
       const name=e.target.name;
@@ -218,7 +226,7 @@ function Information() {
         Upload Resume
        </label>
       <input
-       type="File"
+       type="file"
        id="resume"
        accept=".pdf"
        onChange={handleFileChange}

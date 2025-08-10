@@ -1,12 +1,12 @@
 import userInfoModel from "../models/PersonalInfoModel.js";
 const userInfo=async(req,res)=>{
 const {location,preferredRole,workFromHome,whyHire}=req.body;
-console.log("req.file",req.file);
+
 try{
     const normalizedEmail=req.body.email.toLowerCase();
     const exist= await userInfoModel.findOne({email:normalizedEmail});
      if (!req.file) {
-      return res.status(400).json({ success: false, message: "Resume file missing" });
+      return res.json({ success: false, message: "Resume file missing" });
     }
     if(exist){
         await userInfoModel.updateOne(

@@ -15,11 +15,11 @@ const internshalaJobs=async(email)=>{
        await page.locator("#internships_new_superscript").click();
        await page.waitForSelector("div#select_category_chosen")
         await page.locator("div#select_category_chosen").click();
-        await page.locator("div#select_category_chosen input").pressSequentially(user.preferredRoles);
+        await page.locator("div#select_category_chosen input").pressSequentially(user.preferredRole);
       await page.keyboard.press("Enter");
-    if (user.preferredLocations) {
+    if (user.location) {
     await page.locator("div#city_sidebar_chosen").click();
-    await page.locator("div#city_sidebar_chosen input").pressSequentially(user.preferredLocations);
+    await page.locator("div#city_sidebar_chosen input").pressSequentially(user.location);
     await page.keyboard.press("Enter");
     }
        if(user.workFromHome==="Yes"){
@@ -61,12 +61,12 @@ const internshalaJobs=async(email)=>{
     await page.locator("#easy_apply_modal_close_confirm_exit").click({ force: true });
     await page.waitForTimeout(500);
        } 
-        await page.waitForSelector("div.individual_internship.easy_apply");
-        totalJobs= await page.locator("div.individual_internship.easy_apply").count();
+        await page.waitForSelector("div[employment_type='internship']");
+        totalJobs= await page.locator("div[employment_type='internship']").count();
          if(i>=totalJobs){
           i=totalJobs-1;
          }
-         const card= page.locator("div.individual_internship.easy_apply").nth(i);
+         const card= page.locator("div[employment_type='internship']").nth(i);
          let jobTitle=await card.locator("#job_title").textContent();
          let companyRaw = await card.locator("p[class$='company-name']").textContent();
          let company = (companyRaw || "").trim(); 
@@ -82,7 +82,7 @@ const internshalaJobs=async(email)=>{
         }
         else{
             if(await page.locator("//h4[normalize-space()='Cover letter']").isVisible()){
-                const coverLetterText=user.whyShouldWeHireYou;
+                const coverLetterText=user.whyHire;
                 const editor = page.locator("div.ql-editor[contenteditable='true']");
                 await editor.waitFor({ state: "visible", timeout: 5000 });
                 await editor.fill(coverLetterText);
@@ -116,6 +116,11 @@ const internshalaJobs=async(email)=>{
     catch(error){
      console.log(error);
      return({success:false,message:error.message});
+    }
+    finally{
+        if(context){
+            await context.close();
+        }
     }
 }
 export default internshalaJobs;

@@ -5,6 +5,7 @@ import userRouter from "./routes/UserRoute.js";
 import userRoute from "./routes/PersonalInfoRoute.js";
 import jobsRouter from "./routes/AppliedJobsRoute.js";
 import userDataRoute from "./routes/UserDataRoute.js";
+import fetchJobsRouter from "./routes/FetchJobsRoute.js";
 import 'dotenv/config'
 //app config
 const app=express();
@@ -21,6 +22,7 @@ app.use("/api/user",userRouter)
 app.use("/api",userRoute)
 app.use("/api/dashboard",jobsRouter);
 app.use("/api/fetch",userDataRoute);
+app.use("/api/Jobs",fetchJobsRouter);
 app.listen(port,()=>{
     console.log(`Server started on http://localhost:${port}`)
 })
