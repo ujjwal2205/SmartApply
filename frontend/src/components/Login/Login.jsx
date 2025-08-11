@@ -8,6 +8,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 import './Login.css'
 function Login({ login, setLogin }) {
+  
   const [showPassword,setShowPassword]=useState(false);
 
   const {url,setToken,setUserData}=useContext(StoreContext);
@@ -67,8 +68,8 @@ function Login({ login, setLogin }) {
               })
             if(response.data.status){
               setLogin(true);
-              localStorage.setItem("token",token);
-              setToken(token);
+              localStorage.setItem("token",response.data.token);
+              setToken(response.data.token);
               if(userData.data.success){
               setUserData({
               ...userData.data.data.info,
@@ -95,6 +96,23 @@ function Login({ login, setLogin }) {
      const handleError = () => {
     alert("Google Sign In was unsuccessful. Try again later.");
   };
+  const handleForgotPassword=async()=>{
+    try {
+      toast.success("Checking your email")
+      const response=await axios.post(url+"/api/forgot-password/otp",{
+          email:data.email
+      })
+      if(response.data.success){
+        navigate("/forgot-password",{state:{toastMessage:response.data.message,email:data.email}});
+      }
+      else{
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
+    }
+  }
   return (
     <div className="login-box">
       {/* Close button */}
@@ -125,7 +143,7 @@ function Login({ login, setLogin }) {
         <span onClick={()=>setShowPassword(prev => !prev)}>{showPassword?<FaEyeSlash/>:<FaEye/>}</span>
         </div>
         <div className="forgot-password-box">
-          <button className="forgot-password">Forgot your password?</button>
+          <button type="button" className="forgot-password" onClick={handleForgotPassword}>Forgot your password?</button>
         </div>
 
         <button type="submit" className="submit-button" >Submit</button>

@@ -1,8 +1,20 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import './Header.css';
 import heroImage from '../../assets/auto-apply-hero.png';
-
+import { useLocation} from 'react-router-dom';
+import { toast } from 'react-toastify';
 function Header({login}) {
+  const location=useLocation();
+  useEffect(()=>{
+      try{
+      if(location.state?.toastMessage){
+        toast.success(location.state.toastMessage);
+      }}
+      catch(error){
+        console.log(error);
+        toast.error(error.message);
+      }
+    },[location])
   return (
     <main className="hero">
       {/* Left Content */}

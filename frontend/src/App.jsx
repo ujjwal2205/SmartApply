@@ -11,7 +11,7 @@ import Footer from './components/Footer/Footer'
 import Dashboard from '../src/Dashboard';
 import JobsInfoPage from './pages/JobsInfoPage/JobsInfoPage';
 import UserInfoPage from './pages/UserInfoPage/UserInfoPage';
-
+import ForgotPasswordPage from './pages/ForgotPasswordPage/ForgotPasswordPage.jsx';
 function App() {
   const [login,setLogin]=useState(false);
   return (
@@ -28,6 +28,7 @@ function App() {
        <Route path="jobsInfo" element={<JobsInfoPage />} />
        <Route path="editInformation" element={<UserInfoPage/>}/>
        </Route>
+       <Route path="/forgot-password" element={<ForgotPasswordPage/>}/>
       </Routes>
       <Footer/>
     </div>

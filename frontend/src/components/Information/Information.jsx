@@ -98,7 +98,6 @@ function Information() {
    }
    const handleSubmit=async(e)=>{
     e.preventDefault();
-    console.log(userData.resume);
     const formData=new FormData();
     formData.append("firstName",userData.firstName);
     formData.append("middleName",userData.middleName);
