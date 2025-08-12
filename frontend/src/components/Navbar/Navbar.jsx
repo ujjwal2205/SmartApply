@@ -53,7 +53,9 @@ function Navbar({ login, setLogin }) {
             </div>
           </div>
         ) : (
-          <a className="get-started-button" href="/login">Get Started</a>
+          <Link className="get-started-button" to="/login">
+          Get Started
+          </Link>
         )}
       </div>
     </div>

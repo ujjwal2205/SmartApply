@@ -3,6 +3,7 @@ import './Header.css';
 import heroImage from '../../assets/auto-apply-hero.png';
 import { useLocation} from 'react-router-dom';
 import { toast } from 'react-toastify';
+import {Link} from "react-router-dom";
 function Header({login}) {
   const location=useLocation();
   useEffect(()=>{
@@ -27,12 +28,12 @@ function Header({login}) {
           saving you time and boosting your interview chances.
         </p>
         {login?
-        <a href="/information" className="hero-btn">
+        <Link className="hero-btn" to="/information">
           Start Applying →
-        </a>:
-        <a href="/login" className="hero-btn">
+        </Link>:
+        <Link className="hero-btn" to="/login">
           Start Applying →
-        </a>}
+        </Link>}
 
         <div className="tagline">
           ⚡ Built with Automation · Real-time Tracking
