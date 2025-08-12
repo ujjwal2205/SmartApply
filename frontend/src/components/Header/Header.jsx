@@ -20,7 +20,7 @@ function Header({login}) {
       {/* Left Content */}
       <div className="hero-content">
         <h1>
-          Automate Your Job Hunt <br /> with <span className="highlight">AI Precision</span>
+          Automate Your Job Hunt <br /> with <span className="highlight">Automation</span>
         </h1>
         <p>
           SmartApply finds and applies to jobs that match your resume, skills, and preferences —
@@ -35,7 +35,7 @@ function Header({login}) {
         </a>}
 
         <div className="tagline">
-          ⚡ Built with AI · Automation · Real-time Tracking
+          ⚡ Built with Automation · Real-time Tracking
         </div>
       </div>
 

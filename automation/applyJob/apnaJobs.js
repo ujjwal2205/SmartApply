@@ -1,5 +1,6 @@
 import userInfoModel from "../../backend/models/PersonalInfoModel.js";
 import jobsInfoModel from "../../backend/models/AppliedJobsModel.js";
+import currjobsInfoModel from "../../backend/models/currentJobsModel.js";
 import {chromium} from "playwright";
 const apnaJobs=async(email)=>{
     const normalizedEmail=email.toLowerCase();
@@ -11,6 +12,7 @@ const apnaJobs=async(email)=>{
     try {
         let user=await userInfoModel.findOne({email:normalizedEmail});
         let appliedJobs=await jobsInfoModel.findOne({email:normalizedEmail});
+        let dbcurrJob=await currjobsInfoModel.findOne({email:normalizedEmail});
         await page.goto("https://apna.co/");
         await page.locator('input[class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd"]').first().pressSequentially(user.preferredRole);
         await page.waitForTimeout(1000);
@@ -76,6 +78,18 @@ await applyBtn.first().click();
             jobs:[job]
             })
             await appliedJobs.save();
+            }
+            if(dbcurrJob){
+                dbcurrJob.jobs.push(job);
+                await dbcurrJob.save();
+            }
+            else{
+                dbcurrJob=new currjobsInfoModel({
+                    email:normalizedEmail,
+                    jobs:[job],
+                    Expiry:new Date()
+                })
+                await dbcurrJob.save();
             }
             AppliedJobsCount++;
             console.log(AppliedJobsCount);

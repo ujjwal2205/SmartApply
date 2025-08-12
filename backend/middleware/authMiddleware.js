@@ -12,6 +12,7 @@ if(!token){
 }
 try {
     const token_decode=jwt.verify(token,process.env.JWT_SECRET);
+    req.body = req.body || {};
     req.body.email=token_decode.email;
     next();
 } catch (error) {

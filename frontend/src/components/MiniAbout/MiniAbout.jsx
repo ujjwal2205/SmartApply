@@ -7,7 +7,7 @@ const MiniAbout = () => {
       <div className="about-container">
         <h2 className="about-heading">Our Mission</h2>
         <p className="about-text">
-          We started SmartApply with one goal — to make job hunting effortless using AI. 
+          We started SmartApply with one goal — to make job hunting effortless using Automation. 
           Whether you're a fresher or an experienced professional, our mission is to help you 
           get hired faster, smarter, and stress-free.
         </p>

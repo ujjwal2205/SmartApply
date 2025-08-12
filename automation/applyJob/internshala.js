@@ -1,5 +1,6 @@
 import userInfoModel from "../../backend/models/PersonalInfoModel.js";
 import jobsInfoModel from "../../backend/models/AppliedJobsModel.js";
+import currjobsInfoModel from "../../backend/models/currentJobsModel.js";
 import {chromium} from "playwright";
 const internshalaJobs=async(email)=>{
     const normalizedEmail=email.toLowerCase();
@@ -11,6 +12,7 @@ const internshalaJobs=async(email)=>{
     try{
        let user=await userInfoModel.findOne({email:normalizedEmail});
        let appliedJobs=await jobsInfoModel.findOne({email:normalizedEmail});
+       let dbcurrJob=await currjobsInfoModel.findOne({email:normalizedEmail});
        await page.goto("https://internshala.com");
        await page.locator("#internships_new_superscript").click();
        await page.waitForSelector("div#select_category_chosen")
@@ -102,6 +104,18 @@ const internshalaJobs=async(email)=>{
                         jobs:[job]
                     })
                     await appliedJobs.save();
+                }
+                if(dbcurrJob){
+                    dbcurrJob.jobs.push(job);
+                    await dbcurrJob.save();
+                }
+                else{
+                    dbcurrJob=new currjobsInfoModel({
+                        email:normalizedEmail,
+                        jobs:[job],
+                        Expiry:new Date()
+                    })
+                    await dbcurrJob.save();
                 }
                 AppliedJobsCount++;
                 await page.locator("#submit").click();

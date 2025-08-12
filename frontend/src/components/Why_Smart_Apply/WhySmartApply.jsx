@@ -16,7 +16,7 @@ const features = [
   {
     icon: "📄",
     title: "Tailored Resumes & Cover Letters",
-    desc: "Generate customized documents that match each job using AI.",
+    desc: "Generate customized documents that perfectly match each job.",
   },
   {
     icon: "🔍",
@@ -41,7 +41,7 @@ const WhySmartApply = () => {
     <section className="why-section" id='why-smartapply'>
       <div className="why-container">
         <h2 className="why-heading">Why SmartApply?</h2>
-        <p className="why-subheading">Your AI-powered partner in job hunting</p>
+        <p className="why-subheading">Your intelligent job search companion.</p>
         <div className="why-grid">
           {features.map((feature, index) => (
             <div className="why-card" key={index}>

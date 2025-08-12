@@ -11,7 +11,7 @@ function Information() {
   const [spinner,setSpinner]=useState(true);
   const preferredRoles = [
   { value: "frontend_developer", label: "Frontend Development" },
-  { value: "backend_developer", label: "Backend Development" },
+  { value: "backend_developer", label: "Back end Development" },
   { value: "fullstack_developer", label: "Full Stack Development" },
   { value: "software_engineer", label: "Software Development" },
   { value: "data_analyst", label: "Data Analyst" },

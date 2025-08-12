@@ -11,7 +11,6 @@ function JobsInfo() {
   const [flag,setFlag]=useState(true);
   const {portals,setPortals,token,automation,url,jobs,setJobs}=useContext(StoreContext);
   useEffect(()=>{
-    if(location.state?.toastMessage){
       const runJobs=async()=>{
       setSpinner(true);
     try{
@@ -38,12 +37,57 @@ function JobsInfo() {
        console.log(error);
        toast.error(error.message);
       }finally{
+        try{
+        const response=await axios.post(url+"/api/currJobs/fetch",{},{
+          headers:{
+            Authorization:`Bearer ${token}`
+          }
+        })
+        if(response.data.success){
+          toast.success(response.data.message);
+        }
+        else{
+        toast.error(response.data.message);
+        }}
+        catch(error){
+         console.log(error);
+         toast.error(error.message);
+        }finally{
         setSpinner(false);
         setFlag(false); 
-      }
+      }}
     }
-      runJobs();
+    const fetchJobsOnly=async()=>{
+      setSpinner(true);
+      try {
+        const response=await axios.post(`${url}/api/Jobs/fetchJobs`,{},{
+         headers:{
+             Authorization:`Bearer ${token}`
+           }
+       });
+       if(response.data.success){
+         setJobs(response.data.data);
+       }
+       else{
+         console.log(response.data.message);
+         toast.error(response.data.message);
+       }
+     }
+     catch(error){
+       console.log(error);
+       toast.error(error.message);
+
+      }finally{
+        setSpinner(false);
+      }
     };
+      if(location.state?.toastMessage){
+      runJobs();
+      }
+      else{
+        fetchJobsOnly();
+      }
+    ;
   }
   ,[]);
   useEffect(() => {

@@ -19,7 +19,7 @@ const Footer = () => {
         <div className="footer-brand">
           <h2 className="brand-logo">SmartApply</h2>
           <p className="brand-desc">
-            Your AI-powered job assistant. Apply smarter, track better,
+            Your Automation-powered job assistant. Apply smarter, track better,
             and get hired faster.
           </p>
         </div>

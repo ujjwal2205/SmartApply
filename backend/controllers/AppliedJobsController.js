@@ -1,9 +1,9 @@
 import jobsInfoModel from "../models/AppliedJobsModel.js";
 const jobsInfo=async(req,res)=>{
-    const {email,jobTitle,company,portal,status}=req.body;
+    const {email,jobTitle,company,portal}=req.body;
     try {
         const normalizedEmail=email.toLowerCase();
-        let job={jobTitle,company,portal,status};
+        let job={jobTitle,company,portal};
         let exist=await jobsInfoModel.findOne({email:normalizedEmail});
         if(exist){
          exist.jobs.push(job);
