@@ -5,7 +5,7 @@ import {chromium} from "playwright";
 const naukriJobs=async(email)=>{
     const normalizedEmail=email.toLowerCase();
     const context=await chromium.launchPersistentContext('UserData/naukriUserData',{
-        headless:false,
+        headless:true,
         args: ['--disable-blink-features=AutomationControlled'],
     });
     const page = await context.newPage();
@@ -23,7 +23,7 @@ const naukriJobs=async(email)=>{
         }
         await page.keyboard.press("Enter");
         let pageCounter=0;
-        while(pageCounter<=4){
+        while(pageCounter<=5){
         await page.waitForSelector(".srp-jobtuple-wrapper");
         const jobCards=await page.locator(".srp-jobtuple-wrapper")
         let totalJobs=await jobCards.count();

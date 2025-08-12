@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 const naukriCheck=async()=>{
     const context=await chromium.launchPersistentContext('UserData/naukriUserData',{
-        headless:false,
+        headless:true,
         args:['--disable-blink-features=AutomationControlled']
     })
     const page=await context.newPage();

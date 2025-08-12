@@ -5,7 +5,7 @@ import {chromium} from "playwright";
 const internshalaJobs=async(email)=>{
     const normalizedEmail=email.toLowerCase();
     const context=await chromium.launchPersistentContext('UserData/internshalaUserData',{
-        headless:false,
+        headless:true,
         args: ['--disable-blink-features=AutomationControlled'],
     });
     const page = await context.newPage();
@@ -50,7 +50,7 @@ const internshalaJobs=async(email)=>{
      let AppliedJobsCount=0;
      console.log(totalJobs);
      let i=0;
-     while(AppliedJobsCount<=20 && i<totalJobs){
+     while(AppliedJobsCount<=10 && i<totalJobs){
         if (await page.getByRole("button", { name: "Skip and continue applying" }).isVisible().catch(() => false)) {
   await page.getByRole("button", { name: "Skip and continue applying" }).click({ force: true });
   await page.waitForTimeout(4000); // wait for the modal to fully disappear
