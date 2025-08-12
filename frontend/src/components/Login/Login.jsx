@@ -58,7 +58,7 @@ function Login({ login, setLogin }) {
   const handleSuccess=async(CredentialResponse)=>{
         const token=CredentialResponse.credential;
         try{
-            const response=await axios.post("http://localhost:4000/api/user/googleLogin",{
+            const response=await axios.post(url+"/api/user/googleLogin",{
                 idToken:token,
             })
             const userData=await axios.post(url+"/api/fetch/userData",{},{
