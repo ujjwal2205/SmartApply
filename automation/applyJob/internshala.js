@@ -5,7 +5,7 @@ import {chromium} from "playwright";
 const internshalaJobs=async(email)=>{
     const normalizedEmail=email.toLowerCase();
     const context=await chromium.launchPersistentContext('UserData/internshalaUserData',{
-        headless:true,
+        headless:false,
         args: ['--disable-blink-features=AutomationControlled'],
     });
     const page = await context.newPage();

@@ -5,7 +5,7 @@ import {chromium} from "playwright";
 const apnaJobs=async(email)=>{
     const normalizedEmail=email.toLowerCase();
     const context=await chromium.launchPersistentContext('UserData/apnaJobsUserData',{
-        headless:true,
+        headless:false,
         args: ['--disable-blink-features=AutomationControlled'],
     });
     const page = await context.newPage();

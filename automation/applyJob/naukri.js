@@ -5,7 +5,7 @@ import {chromium} from "playwright";
 const naukriJobs=async(email)=>{
     const normalizedEmail=email.toLowerCase();
     const context=await chromium.launchPersistentContext('UserData/naukriUserData',{
-        headless:true,
+        headless:false,
         args: ['--disable-blink-features=AutomationControlled'],
     });
     const page = await context.newPage();

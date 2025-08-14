@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 const internshalaCheck=async()=>{
     const context = await chromium.launchPersistentContext('UserData/internshalaUserData', {
-  headless: true,  
+  headless: false,  
   args:['--disable-blink-features=AutomationControlled']
 });
     const page=await context.newPage();
