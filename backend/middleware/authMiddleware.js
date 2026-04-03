@@ -8,7 +8,7 @@ if(!authHeader || !authHeader.startsWith("Bearer ")){
 }
 const token=authHeader.split(" ")[1];
 if(!token){
-    return res.json({success:false,message:"Not Authorized Login Agian"});
+    return res.json({success:false,message:"Not Authorized Login Again"});
 }
 try {
     const token_decode=jwt.verify(token,process.env.JWT_SECRET);

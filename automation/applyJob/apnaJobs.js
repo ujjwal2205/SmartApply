@@ -49,7 +49,8 @@ const apnaJobs=async(email)=>{
            let job={
             jobTitle:jobTitle,
             company:company,
-            portal:portal
+            portal:portal,
+            appliedDate:new Date()
             }
             if(await currJob.locator("[data-testid='job-salary']").textContent()==="Not disclosed"){
                 

@@ -12,7 +12,7 @@ const signUpUser=async(req,res)=>{
     const {firstName,middleName,lastName,email,password,confirmPassword}=req.body;
     try{
         // if user already exists
-        const normalizedEmail=email.toLowerCase();
+        const normalizedEmail=await email.toLowerCase();
         const exists=await userModel.findOne({email:normalizedEmail});
         if(exists){
             return res.json({success:false,message:"User Already Exists"})

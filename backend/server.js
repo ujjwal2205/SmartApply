@@ -10,6 +10,7 @@ import passwordReset from "./routes/passwordResetRoute.js";
 import Verification from "./routes/OtpVerificationRoute.js";
 import currJob from "./routes/currentJobsRoute.js";
 import 'dotenv/config'
+
 //app config
 const app=express();
 const port=4000;

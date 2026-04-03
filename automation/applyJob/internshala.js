@@ -32,7 +32,7 @@ const internshalaJobs=async(email)=>{
     let sameCountTries = 0;
 
     while (true) {
-      const cards = await page.locator("div.individual_internship.easy_apply");
+      const cards = await page.locator("div.individual_internship");
       const currentCount = await cards.count();
 
       if (currentCount === previousCount) {
@@ -46,7 +46,7 @@ const internshalaJobs=async(email)=>{
       await page.mouse.wheel(0, 3000); // scroll down
       await page.waitForTimeout(1500);
     }
-     let totalJobs=await page.locator("div.individual_internship.easy_apply").count();
+     let totalJobs=await page.locator("div.individual_internship").count();
      let AppliedJobsCount=0;
      console.log(totalJobs);
      let i=0;
@@ -92,7 +92,8 @@ const internshalaJobs=async(email)=>{
             let job={
                 jobTitle:jobTitle,
                 company:company,
-                portal:portal
+                portal:portal,
+                appliedDate:new Date()
             }
             if(appliedJobs){
                     appliedJobs.jobs.push(job);

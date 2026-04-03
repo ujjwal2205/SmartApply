@@ -3,6 +3,12 @@ const jobsSchema=new mongoose.Schema({
     jobTitle:{type:String},
     company:{type:String},
     portal:{type:String},
+    appliedDate:{type:Date,required:true},
+    status:{
+        type:String,
+        enum:["Applied","Interviewed","Rejected","Selected"],
+        default:"Applied"
+    }
 })
 const jobsInfoSchema=new mongoose.Schema({
     email:{type:String,unique:true,required:true},

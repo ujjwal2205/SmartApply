@@ -57,7 +57,8 @@ const naukriJobs=async(email)=>{
               let job={
                   jobTitle:jobTitle,
                   company:company,
-                  portal:portal
+                  portal:portal,
+                  appliedDate:new Date()
                 }
                 if(appliedJobs){
                     appliedJobs.jobs.push(job);

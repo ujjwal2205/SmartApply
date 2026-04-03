@@ -1,178 +1,196 @@
-.jobsInfo {
-  width: 100%;
-  font-family: 'Segoe UI', sans-serif;
-  color: #1f2937;
-  background: #f9fafb;
-  padding: 1rem;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #2563eb;
+  --bg-body: #f1f5f9;
+  --surface: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  
+  /* Business Status Colors */
+  --status-applied: #3b82f6;
+  --status-interview: #d97706;
+  --status-selected: #059669;
+  --status-rejected: #dc2626;
 }
 
-/* --- Topbar section --- */
+.jobsInfo {
+  padding: 32px;
+  background-color: var(--bg-body);
+  min-height: 100vh;
+  font-family: 'Inter', sans-serif;
+  color: var(--text-primary);
+}
+
+/* --- Header & Summary Card --- */
 .topbar {
   display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  margin-bottom: 2rem;
-}
-
-/* --- Total Applied Jobs Card --- */
-.appliedJobsCard {
-  background: linear-gradient(to right, #f1f5f9, #e2e8f0);
-  border-radius: 12px;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
-  padding: 1.5rem;
-  flex: 1;
-  min-width: 220px;
-  display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  text-align: center;
-  transition: transform 0.2s ease;
+  margin-bottom: 32px;
 }
 
-.appliedJobsCard:hover {
-  transform: translateY(-3px);
+.appliedJobsCard {
+  background: var(--surface);
+  padding: 16px 24px;
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  border: 1px solid var(--border-color);
+  min-width: 200px;
 }
 
 .appliedJobsCard h2 {
-  font-size: 1.5rem;
+  font-size: 0.75rem;
   font-weight: 600;
-  color: #0f172a;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.4px;
-  text-shadow: 0.4px 0.4px rgba(0, 0, 0, 0.1);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin: 0 0 4px 0;
 }
 
-.appliedJobsCard p {
-  font-size: 2.2rem;
+.count-badge {
+  font-size: 1.75rem;
   font-weight: 700;
-  color: #0f172a;
+  color: var(--text-primary);
 }
 
-/* --- Portal Session Status Buttons --- */
-.portal-status {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 0.8rem;
-  width: 100%;
-  margin-top: 1rem;
-}
-
-.portalButtonExpired {
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #fca5a5;
-  font-size: 0.9rem;
-  cursor: pointer;
-  background-color: #fee2e2;
-  color: #b91c1c;
-  transition: background 0.3s ease;
-  text-align: center;
-}
-
-.portalButtonExpired:hover {
-  background-color: #f87171;
-  color: white;
-}
-
-/* --- Search and Filter Controls --- */
-.controls {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  flex-wrap: wrap;
-}
-
-.controls input[type="text"] {
-  flex: 1;
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  font-size: 1rem;
-  background-color: white;
-}
-
-.controls select {
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  border: 1px solid #d1d5db;
-  font-size: 1rem;
-  background-color: white;
-}
-
-/* --- Jobs Table --- */
-.jobsTable table {
-  width: 100%;
-  border-collapse: collapse;
-  background: white;
+/* --- Professional Filter Console --- */
+.controls-container {
+  background: var(--surface);
+  padding: 20px;
   border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-}
-
-.jobsTable th,
-.jobsTable td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid #e5e7eb;
-}
-
-.jobsTable th {
-  background-color: #f3f4f6;
-  font-weight: 600;
-  font-size: 1rem;
-  color: #1f2937;
-}
-
-.jobsTable td {
-  font-size: 0.95rem;
-  color: #374151;
-}
-
-.jobsTable select {
-  padding: 0.4rem 0.7rem;
-  border-radius: 6px;
-  border: 1px solid #d1d5db;
-  background-color: #f9fafb;
-  font-size: 0.95rem;
-}
-
-/* No jobs row styling */
-.jobsTable td[colspan="4"] {
-  text-align: center;
-  color: #9ca3af;
-  font-style: italic;
-  padding: 2rem 0;
-}
-.spinner-container {
+  border: 1px solid var(--border-color);
+  margin-bottom: 24px;
   display: flex;
   flex-direction: column;
+  gap: 20px;
+}
+
+.filter-row {
+  display: flex;
+  gap: 12px;
   align-items: center;
-  justify-content: center;
-  min-height: 40vh;
 }
 
-.spinner {
-  width: 60px;
-  height: 60px;
-  border: 6px solid #e0e0e0;
-  border-top: 6px solid #007BFF;
-  border-radius: 50%;
-  animation: spin 1s ease-in-out infinite;
+.search-input {
+  flex: 1;
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.2s;
 }
 
-.spinner-text {
-  margin-top: 20px;
-  font-size: 17px;
-  color: #333;
+.search-input:focus { border-color: var(--primary); }
+
+.filter-select {
+  padding: 10px 16px;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: #fff;
+  font-size: 0.85rem;
   font-weight: 500;
-  text-align: center;
-  max-width: 500px;
-  line-height: 1.5;
+  color: var(--text-secondary);
+  cursor: pointer;
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+/* Date Classification Bar */
+.date-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-top: 16px;
+  border-top: 1px solid #f1f5f9;
 }
+
+.date-label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 80px;
+}
+
+.date-picker-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #f8fafc;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-color);
+}
+
+.date-picker-box label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+}
+
+.date-picker-box input {
+  border: none;
+  background: transparent;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  outline: none;
+}
+
+/* --- Data Table --- */
+.jobsTable {
+  background: var(--surface);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th {
+  background: #f8fafc;
+  padding: 14px 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  text-align: left;
+  border-bottom: 1px solid var(--border-color);
+}
+
+tbody td {
+  padding: 16px 20px;
+  border-bottom: 1px solid #f1f5f9;
+  font-size: 0.9rem;
+}
+
+tbody tr:hover { background-color: #fcfdfe; }
+
+.job-cell b { display: block; color: var(--text-primary); margin-bottom: 2px; }
+.job-cell span { font-size: 0.8rem; color: var(--text-secondary); }
+
+/* Compact Status Pills */
+.status-dropdown {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  width: 120px;
+}
+
+.status-applied { background: #eff6ff; color: var(--status-applied); border-color: #dbeafe; }
+.status-interviewed { background: #fffbeb; color: var(--status-interview); border-color: #fef3c7; }
+.status-selected { background: #ecfdf5; color: var(--status-selected); border-color: #d1fae5; }
+.status-rejected { background: #fef2f2; color: var(--status-rejected); border-color: #fee2e2; }
+
+/* Loader */
+.spinner-container { height: 50vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.spinner { width: 40px; height: 40px; border: 3px solid #e2e8f0; border-top-color: var(--primary); border-radius: 50%; animation: spin 0.8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }

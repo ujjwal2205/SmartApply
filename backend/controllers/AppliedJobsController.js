@@ -3,7 +3,8 @@ const jobsInfo=async(req,res)=>{
     const {email,jobTitle,company,portal}=req.body;
     try {
         const normalizedEmail=email.toLowerCase();
-        let job={jobTitle,company,portal};
+        let appliedDate=new Date();
+        let job={jobTitle,company,portal,appliedDate};
         let exist=await jobsInfoModel.findOne({email:normalizedEmail});
         if(exist){
          exist.jobs.push(job);
@@ -12,7 +13,7 @@ const jobsInfo=async(req,res)=>{
         else{
             exist=new jobsInfoModel({
                 email:normalizedEmail,
-                jobs:[job]
+                jobs:[job],
             })
             await exist.save();
         }
@@ -22,4 +23,24 @@ const jobsInfo=async(req,res)=>{
         res.json({success:false,message:error.message});
     }
 }
-export default jobsInfo;
+const updateJobStatus=async(req,res)=>{
+    const {email,jobId,status}=req.body;
+    try {
+        const normalizedEmail=email.toLowerCase();
+        const user=await jobsInfoModel.findOne({email:normalizedEmail});
+        if(!user){
+            return res.json({success:false,message:"User not found"});
+        }
+        const job=user.jobs.find(j=>j._id.toString()===jobId);
+        if(!job){
+            return res.json({success:false,message:"Job not found"});
+        }
+        job.status=status;
+        await user.save();
+        return res.json({success:true,message:"Job status updated!"});
+    } catch (error) {
+        console.log(error);
+        return res.json({success:false,message:error.message});
+    }
+}
+export {jobsInfo,updateJobStatus};

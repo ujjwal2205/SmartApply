@@ -2,19 +2,19 @@ import React from 'react';
 import './CompanyScroller.css';
 
 const logos = [
-  'https://logo.clearbit.com/google.com',
-  'https://logo.clearbit.com/meta.com',
-  'https://logo.clearbit.com/amazon.com',
-  'https://logo.clearbit.com/microsoft.com',
-  'https://logo.clearbit.com/netflix.com',
-  'https://logo.clearbit.com/tesla.com',
-  'https://logo.clearbit.com/airbnb.com',
-  'https://logo.clearbit.com/adobe.com',
-  'https://logo.clearbit.com/stripe.com',
-  'https://logo.clearbit.com/intel.com',
-  'https://logo.clearbit.com/apple.com',
-  'https://logo.clearbit.com/zomato.com',
-  'https://logo.clearbit.com/uber.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=google.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=meta.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=amazon.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=microsoft.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=netflix.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=tesla.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=airbnb.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=adobe.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=stripe.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=intel.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=apple.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=zomato.com',
+  'https://www.google.com/s2/favicons?sz=128&domain=uber.com',
 ];
 
 function CompanyScroller() {
