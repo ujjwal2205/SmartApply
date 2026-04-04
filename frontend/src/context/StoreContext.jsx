@@ -13,6 +13,7 @@ function StoreProvider(props) {
       location:"",
       preferredRole:"",
       workFromHome:"",
+      minStipend:"",
       whyHire:"",
       resume:null,
     })

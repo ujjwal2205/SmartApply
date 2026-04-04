@@ -36,7 +36,18 @@ const naukriJobs=async(email)=>{
           let preferredRoles=user.preferredRole.toLowerCase().split(" ").map(role=>role.trim());
           let checkJobTitle=jobTitle.toLowerCase();
           let isMatching=preferredRoles.some(role=>checkJobTitle.includes(role));
-          if(!isMatching){
+          const salaryTitle = await card.locator('.sal span').getAttribute('title');
+          let minStipend=0;
+          if(salaryTitle.toLowerCase().includes("unpaid")){
+            minStipend=0;
+          }
+          else{
+            const match = salaryTitle.match(/₹\s*([\d,]+)/);
+            if(match){
+                minStipend=Number(match[1].replace(/,/g, ""));
+            }
+          }
+          if(!isMatching && minStipend<user.minStipend){
             i++;
             continue;
           }

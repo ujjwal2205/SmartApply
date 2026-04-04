@@ -1,7 +1,7 @@
 import userInfoModel from "../models/PersonalInfoModel.js";
 import userModel from "../models/UserModel.js";
 const userInfo=async(req,res)=>{
-const {location,preferredRole,workFromHome,whyHire,firstName,middleName,lastName}=req.body;
+const {location,preferredRole,workFromHome,whyHire,firstName,middleName,lastName,minStipend}=req.body;
 
 try{
     const normalizedEmail=req.body.email.toLowerCase();
@@ -26,6 +26,7 @@ try{
                 data:req.file.buffer,
                 contentType:req.file.mimetype,
             },
+            minStipend:Number(minStipend)||0
         })
     }
     else{
@@ -39,7 +40,8 @@ try{
                 name:req.file.originalname,
                 data:req.file.buffer,
                 contentType:req.file.mimetype,
-            }
+            },
+            minStipend:Number(minStipend)||0
         })
         await newUser.save();
     }

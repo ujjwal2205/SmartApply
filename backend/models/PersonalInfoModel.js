@@ -9,7 +9,8 @@ const userInfoSchema=new mongoose.Schema({
     name:String,
     data:Buffer,
     contentType:String,
- }
+ },
+ minStipend:{type:Number,default:0}
 })
 const userInfoModel=mongoose.models.info || mongoose.model("info",userInfoSchema);
 export default userInfoModel

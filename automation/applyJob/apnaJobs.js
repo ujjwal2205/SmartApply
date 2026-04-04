@@ -30,6 +30,42 @@ const apnaJobs=async(email)=>{
         if(user.workFromHome==="Yes"){
         await page.locator("input[value='wfh']").click()
        }
+       await page.waitForTimeout(2000);
+const normalizeStipend = (value) => {
+  if (value < 10000) return 0;
+  return Math.floor(value / 10000) * 10000;
+};
+
+const target = normalizeStipend(user.minStipend);
+
+const slider = page.locator('[aria-valuemax="150000"]');
+await slider.waitFor({ state: "visible" });
+
+const sliderTrack = slider.locator('xpath=ancestor::span[contains(@class,"MuiSlider-root")]');
+
+await sliderTrack.scrollIntoViewIfNeeded();
+
+const box = await sliderTrack.boundingBox();
+
+const max = 150000;
+
+const percent = target / max;
+const targetX = box.x + box.width * percent;
+const centerY = box.y + box.height / 2;
+await page.mouse.click(targetX, centerY);
+await page.waitForTimeout(1000);
+
+let newValue = Number(await slider.getAttribute("aria-valuenow"));
+if (Math.abs(newValue - target) > 2000) {
+  let tries = 0;
+
+  while (Math.abs(newValue - target) > 2000 && tries < 5) {
+    await page.mouse.click(targetX, centerY);
+    await page.waitForTimeout(800);
+    newValue = Number(await slider.getAttribute("aria-valuenow"));
+    tries++;
+  }
+}
        let pageCounter=0;
        let AppliedJobsCount=0;
        while(pageCounter<=10){
@@ -52,10 +88,14 @@ const apnaJobs=async(email)=>{
             portal:portal,
             appliedDate:new Date()
             }
-            if(await currJob.locator("[data-testid='job-salary']").textContent()==="Not disclosed"){
-                
+            
+            const salaryText=await currJob.locator("[data-testid='job-salary']").textContent();
+            const minStipend=salaryText.match(/₹\s*([\d,]+)/);
+            let minValue=0;
+            if(minStipend){
+                minValue = Number(minStipend[1].replace(/,/g, ""));
             }
-            else{
+            if(salaryText!=="Not disclosed" && user.minStipend<=minValue){
                 const [newPage]=await Promise.all(
                      [
                          context.waitForEvent("page"),

@@ -1,4 +1,5 @@
 import React,{useState,useEffect,useContext} from 'react'
+import Slider from "@mui/material/Slider";
 import { useNavigate } from 'react-router-dom';
 import './Information.css'
 import {toast} from 'react-toastify';
@@ -98,6 +99,7 @@ function Information() {
    }
    const handleSubmit=async(e)=>{
     e.preventDefault();
+    console.log(userData.minStipend);
     const formData=new FormData();
     formData.append("firstName",userData.firstName);
     formData.append("middleName",userData.middleName);
@@ -106,6 +108,7 @@ function Information() {
     formData.append("preferredRole",userData.preferredRole);
     formData.append("workFromHome",userData.workFromHome);
     formData.append("whyHire",userData.whyHire);
+    formData.append("minStipend",userData.minStipend);
     if(userData.resume instanceof File){
     formData.append("resume",userData.resume);
     }
@@ -159,6 +162,16 @@ function Information() {
       console.log(error);
       toast.error(error.message);
     }
+    }
+    const formatLabel=(value)=>{
+      if(value===0) return "₹0";
+      return `₹${value/1000}k`;
+    }
+    const handleStipendChange=(event,value)=>{
+      setUserData((prev)=>({
+        ...prev,
+        minStipend:value
+      }))
     }
     return (
       spinner?<div className="spinner-container">
@@ -218,8 +231,31 @@ function Information() {
           <option value="Yes">Open to Work From Home?</option>
           <option value="Yes">Yes</option>
           <option value="No">No</option>
-          
         </select>
+        <div className="slider-container">
+
+  <p className="slider-label">
+    Minimum Stipend: {formatLabel(userData.minStipend || 0)}
+  </p>
+
+  <Slider
+    value={userData.minStipend || 0}
+    onChange={handleStipendChange}
+    min={0}
+    max={20000}
+    step={2000}
+    valueLabelDisplay="on"
+    valueLabelFormat={formatLabel}
+    className="custom-slider"
+  />
+
+  <div className="slider-marks">
+    <span>₹0</span>
+    <span>₹10k</span>
+    <span>₹20k</span>
+  </div>
+
+</div>
         <div className="resumeUpload">
        <label className="resumeLabel" htmlFor="resume">
         Upload Resume

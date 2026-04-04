@@ -24,9 +24,18 @@ const internshalaJobs=async(email)=>{
     await page.locator("div#city_sidebar_chosen input").pressSequentially(user.location);
     await page.keyboard.press("Enter");
     }
+    await page.waitForTimeout(3000);
        if(user.workFromHome==="Yes"){
         await page.locator("label[for='work_from_home']").click()
        }
+       await page.waitForTimeout(3000);
+       if(user.minStipend>10000){
+        await page.locator('#stipend_filter').fill('10000');
+       }
+       else{
+       await page.locator('#stipend_filter').fill(`${user.minStipend}`);
+       }
+       await page.waitForTimeout(3000);
        // SCROLL TO LOAD ALL JOBS
     let previousCount = 0;
     let sameCountTries = 0;
@@ -73,6 +82,19 @@ const internshalaJobs=async(email)=>{
          let companyRaw = await card.locator("p[class$='company-name']").textContent();
          let company = (companyRaw || "").trim(); 
          let portal="Internshala";
+         const stipendText=await card.locator('.stipend').innerText();
+         let minStipend=0;
+         if(!stipendText.toLowerCase().includes("unpaid")){
+             const match = stipendText.match(/₹\s*([\d,]+)/);
+             if (match) {
+             minStipend = Number(match[1].replace(/,/g, ""));
+             }
+             if(minStipend<user.minStipend){
+                i++;
+                continue;
+             }
+         }
+
          await card.click();
          await page.waitForTimeout(2000);
          await page.getByText("Additional question(s)").waitFor({ timeout: 2000 }).catch(() => {});
@@ -89,6 +111,15 @@ const internshalaJobs=async(email)=>{
                 await editor.waitFor({ state: "visible", timeout: 5000 });
                 await editor.fill(coverLetterText);
             }
+            if(await page.locator("button[class='frame-close'] i[class='ic-24-cross']").isVisible()){
+               await page.locator("button[class='frame-close'] i[class='ic-24-cross']").click();
+            }
+            const fileInput=page.locator("input[type='file']");
+            await fileInput.setInputFiles({
+                name:user.resume.name,
+                mimeType:user.resume.contentType,
+                buffer:user.resume.data
+            })
             let job={
                 jobTitle:jobTitle,
                 company:company,
