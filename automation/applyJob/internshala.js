@@ -11,8 +11,7 @@ const internshalaJobs=async(email)=>{
     const page = await context.newPage();
     try{
        let user=await userInfoModel.findOne({email:normalizedEmail});
-       let appliedJobs=await jobsInfoModel.findOne({email:normalizedEmail});
-       let dbcurrJob=await currjobsInfoModel.findOne({email:normalizedEmail});
+       
        await page.goto("https://internshala.com");
        await page.locator("#internships_new_superscript").click();
        await page.waitForSelector("div#select_category_chosen")
@@ -126,29 +125,27 @@ const internshalaJobs=async(email)=>{
                 portal:portal,
                 appliedDate:new Date()
             }
-            if(appliedJobs){
-                    appliedJobs.jobs.push(job);
-                    await appliedJobs.save();
-                }
-                else{
-                    appliedJobs=new jobsInfoModel({
-                        email:normalizedEmail,
-                        jobs:[job]
-                    })
-                    await appliedJobs.save();
-                }
-                if(dbcurrJob){
-                    dbcurrJob.jobs.push(job);
-                    await dbcurrJob.save();
-                }
-                else{
-                    dbcurrJob=new currjobsInfoModel({
-                        email:normalizedEmail,
-                        jobs:[job],
-                        Expiry:new Date()
-                    })
-                    await dbcurrJob.save();
-                }
+          await jobsInfoModel.findOneAndUpdate(
+                        { email: normalizedEmail },
+                          {
+                              $setOnInsert: {
+                              email: normalizedEmail,
+                              },
+                              $addToSet: { jobs: job }
+                          },
+                          { upsert: true }
+                          );
+                          await currjobsInfoModel.findOneAndUpdate(
+                         { email: normalizedEmail },
+                         {
+                         $setOnInsert: {
+                         email: normalizedEmail,
+                         Expiry: new Date()
+                        },
+                          $addToSet: { jobs: job }
+                        },
+                         { upsert: true }
+                          );
                 AppliedJobsCount++;
                 await page.locator("#submit").click();
                 await page.waitForTimeout(5000);

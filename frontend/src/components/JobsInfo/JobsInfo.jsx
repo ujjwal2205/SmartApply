@@ -37,6 +37,17 @@ function JobsInfo() {
             status ? axios.post(`${automation}/apply/${p}`, {}, { headers: { Authorization: `Bearer ${token}` }}) : null
           );
           await Promise.all(promises);
+          // Send email after automation completes
+          try {
+            const emailResponse = await axios.post(`${url}/api/currJobs/fetch`, {}, { headers: { Authorization: `Bearer ${token}` } });
+            if (emailResponse.data.success) {
+              toast.success(emailResponse.data.message);
+            } else {
+              toast.error(emailResponse.data.message);
+            }
+          } catch (error) {
+            toast.error("Failed to send email");
+          }
           await fetchJobsData();
           toast.success(location.state.toastMessage);
           navigate(location.pathname, { replace: true, state: {} });

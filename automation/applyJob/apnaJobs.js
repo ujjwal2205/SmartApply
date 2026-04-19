@@ -11,8 +11,7 @@ const apnaJobs=async(email)=>{
     const page = await context.newPage();
     try {
         let user=await userInfoModel.findOne({email:normalizedEmail});
-        let appliedJobs=await jobsInfoModel.findOne({email:normalizedEmail});
-        let dbcurrJob=await currjobsInfoModel.findOne({email:normalizedEmail});
+        
         await page.goto("https://apna.co/");
         await page.locator('input[class="MuiInputBase-input MuiInput-input MuiInputBase-inputAdornedStart MuiInputBase-inputAdornedEnd"]').first().pressSequentially(user.preferredRole);
         await page.waitForTimeout(1000);
@@ -102,36 +101,33 @@ if (Math.abs(newValue - target) > 2000) {
                          currJob.click()
                      ]
                    )
-            const applyBtn = newPage.locator("div[class$='w-full cursor-pointer rounded border border-solid bg-[#1F8268] px-[16px] py-[8px] text-center font-semibold text-white']");
-await applyBtn.first().waitFor({ state: 'visible' });
-await applyBtn.first().click();
+            const applyBtn = newPage.locator("div.flex-1 button:has-text('Apply for job')");
+            await applyBtn.click();
             if(await newPage.getByRole("button",{name:"Apply anyway"}).isVisible().catch(() => false)){
              await newPage.getByRole("button",{name:"Apply anyway"}).click();
              await newPage.waitForTimeout(5000);
             }
-            if(appliedJobs){
-            appliedJobs.jobs.push(job);
-            await appliedJobs.save();
-            }
-            else{
-            appliedJobs=new jobsInfoModel({
-            email:normalizedEmail,
-            jobs:[job]
-            })
-            await appliedJobs.save();
-            }
-            if(dbcurrJob){
-                dbcurrJob.jobs.push(job);
-                await dbcurrJob.save();
-            }
-            else{
-                dbcurrJob=new currjobsInfoModel({
-                    email:normalizedEmail,
-                    jobs:[job],
-                    Expiry:new Date()
-                })
-                await dbcurrJob.save();
-            }
+           await jobsInfoModel.findOneAndUpdate(
+                         { email: normalizedEmail },
+                           {
+                               $setOnInsert: {
+                               email: normalizedEmail,
+                               },
+                              $addToSet: { jobs: job }
+                           },
+                           { upsert: true }
+                           );
+                           await currjobsInfoModel.findOneAndUpdate(
+                          { email: normalizedEmail },
+                          {
+                          $setOnInsert: {
+                          email: normalizedEmail,
+                          Expiry: new Date()
+                         },
+                          $addToSet: { jobs: job }
+                         },
+                          { upsert: true }
+                           );
             AppliedJobsCount++;
             console.log(AppliedJobsCount);
             newPage.close();

@@ -11,8 +11,7 @@ const naukriJobs=async(email)=>{
     const page = await context.newPage();
     try {
         let user=await userInfoModel.findOne({email:normalizedEmail});
-        let appliedJobs=await jobsInfoModel.findOne({email:normalizedEmail});
-        let dbcurrJob=await currjobsInfoModel.findOne({email:normalizedEmail});
+        
         await page.goto("https://www.naukri.com");
         await page.locator("//span[@class='nI-gNb-sb__placeholder']").click();
         await page.locator("#jobType").click();
@@ -71,29 +70,27 @@ const naukriJobs=async(email)=>{
                   portal:portal,
                   appliedDate:new Date()
                 }
-                if(appliedJobs){
-                    appliedJobs.jobs.push(job);
-                    await appliedJobs.save();
-                }
-                else{
-                    appliedJobs=new jobsInfoModel({
-                        email:normalizedEmail,
-                        jobs:[job]
-                    })
-                    await appliedJobs.save();
-                }
-                if(dbcurrJob){
-                dbcurrJob.jobs.push(job);
-                await dbcurrJob.save();
-                }
-                else{
-                dbcurrJob=new currjobsInfoModel({
-                email:normalizedEmail,
-                jobs:[job],
-                Expiry:new Date()
-                })
-                await dbcurrJob.save();
-                }
+                await jobsInfoModel.findOneAndUpdate(
+              { email: normalizedEmail },
+                {
+                    $setOnInsert: {
+                    email: normalizedEmail,
+                    },
+                    $addToSet: { jobs: job }
+                },
+                { upsert: true }
+                );
+                await currjobsInfoModel.findOneAndUpdate(
+               { email: normalizedEmail },
+               {
+               $setOnInsert: {
+               email: normalizedEmail,
+               Expiry: new Date()
+              },
+                $addToSet: { jobs: job }
+              },
+               { upsert: true }
+                );
                 AppliedJobsCount++;
                 await newPage.close();
             }
