@@ -3,6 +3,116 @@ import jobsInfoModel from "../../backend/models/AppliedJobsModel.js";
 import currjobsInfoModel from "../../backend/models/currentJobsModel.js";
 import {chromium} from "playwright";
 const apnaJobs=async(email)=>{
+    const roleMap = {
+  "Frontend Development": [
+    "frontend", "front end", "react", "angular", "vue",
+    "javascript", "html", "css", "ui developer", "web developer","software developer"
+  ],
+
+  "Back end Development": [
+    "backend", "back end", "node", "express", "api",
+    "java", "spring", "django", "flask", "server","software developer"
+  ],
+
+  "Full Stack Development": [
+    "full stack", "mern", "mean",
+    "react", "node", "express", "mongodb",
+    "frontend", "backend", "web developer", "software engineer","software developer"
+  ],
+
+  "Software Development": [
+    "software engineer", "software developer", "sde",
+    "programmer", "developer", "application developer"
+  ],
+
+  "Data Analyst": [
+    "data analyst", "sql", "excel", "power bi",
+    "tableau", "data analysis", "analytics"
+  ],
+
+  "Data Science": [
+    "data scientist", "machine learning", "deep learning",
+    "python", "nlp", "statistics"
+  ],
+
+  "Machine Learning": [
+    "machine learning", "ml engineer", "deep learning",
+    "tensorflow", "pytorch", "ai engineer"
+  ],
+
+  "Android App Development": [
+    "android", "kotlin", "java",
+    "android developer", "mobile developer"
+  ],
+
+  "iOS App Development": [
+    "ios", "swift", "objective c",
+    "ios developer", "mobile developer"
+  ],
+
+  "DevOps Engineer": [
+    "devops", "docker", "kubernetes", "ci/cd",
+    "jenkins", "aws", "azure"
+  ],
+
+  "UI/UX Design": [
+    "ui", "ux", "figma", "adobe xd",
+    "design", "user experience"
+  ],
+
+  "Cloud Computing": [
+    "cloud", "aws", "azure", "gcp",
+    "cloud engineer", "cloud architect"
+  ],
+
+  "Software Testing": [
+    "qa", "testing", "automation testing",
+    "manual testing", "selenium"
+  ],
+
+  "Product Management": [
+    "product manager", "product management",
+    "roadmap", "product owner"
+  ],
+
+  "Business Development": [
+    "business development", "sales", "marketing",
+    "lead generation"
+  ],
+
+  "Blockchain Development": [
+    "blockchain", "web3", "solidity",
+    "ethereum", "smart contract"
+  ],
+
+  "Game Development": [
+    "game developer", "unity", "unreal",
+    "game design"
+  ],
+
+  "Cyber Security": [
+    "cyber security", "security", "ethical hacking",
+    "penetration testing", "infosec"
+  ]
+};
+const isRelevantKeyword = (jobTitle, preferredRole) => {
+  if (!jobTitle || !preferredRole) return false;
+  const title = jobTitle.toLowerCase();
+  
+  
+  const keywords = roleMap[preferredRole] || preferredRole.split(" ");
+  
+  let matchCount = 0;
+  
+  for (let keyword of keywords) {
+      if (title.includes(keyword)) {
+          matchCount++;
+        }
+    }
+    
+    console.log(`Portal:${jobTitle}` +`PreferredRole:${preferredRole}` +`MatchCount:${matchCount}`);
+  return matchCount>=1;
+};
     const normalizedEmail=email.toLowerCase();
     const context=await chromium.launchPersistentContext('UserData/apnaJobsUserData',{
         headless:false,
@@ -94,14 +204,14 @@ if (Math.abs(newValue - target) > 2000) {
             if(minStipend){
                 minValue = Number(minStipend[1].replace(/,/g, ""));
             }
-            if(salaryText!=="Not disclosed" && user.minStipend<=minValue){
+            if(salaryText!=="Not disclosed" && user.minStipend<=minValue && isRelevantKeyword(jobTitle,user.preferredRole)){
                 const [newPage]=await Promise.all(
                      [
                          context.waitForEvent("page"),
                          currJob.click()
                      ]
                    )
-            const applyBtn = newPage.locator("div.flex-1 button:has-text('Apply for job')");
+            const applyBtn = newPage.locator("div.flex-1 button:has-text('Apply for job')").or(newPage.locator("div.flex-1 button:has-text('Register for walk in')"));
             await applyBtn.click();
             if(await newPage.getByRole("button",{name:"Apply anyway"}).isVisible().catch(() => false)){
              await newPage.getByRole("button",{name:"Apply anyway"}).click();
